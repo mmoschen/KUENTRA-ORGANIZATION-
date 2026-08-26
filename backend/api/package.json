@@ -1,0 +1,6 @@
+{
+  "name": "@kuentra/api",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Future standalone NestJS API for Kuentra"
+}

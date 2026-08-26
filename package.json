@@ -1,0 +1,19 @@
+{
+  "name": "kuentra",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "frontend/*",
+    "backend/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@kuentra/web",
+    "build": "npm run build --workspace=@kuentra/web",
+    "lint": "npm run lint --workspace=@kuentra/web",
+    "typecheck": "npm run typecheck --workspace=@kuentra/web"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
