@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowRight, BadgeCheck, MessageCircle, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, BadgeCheck, MessageCircle } from "lucide-react";
+import { BrandMark } from "./brand";
 
 export function Hero() {
   return (
@@ -25,11 +26,11 @@ export function Hero() {
         <div className="hero-console relative mx-auto aspect-[0.92] w-full max-w-[530px] lg:justify-self-end">
           <div className="absolute inset-[9%] rounded-full border border-brand/20" />
           <div className="absolute inset-[20%] rounded-full border border-brand/15" />
-          <div className="absolute left-1/2 top-1/2 grid size-40 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-brand-dark text-white shadow-[0_25px_70px_rgba(12,56,104,0.28)] md:size-48">
+          <div className="absolute left-1/2 top-1/2 grid size-40 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-brand/15 bg-white text-ink shadow-[0_25px_70px_rgba(12,56,104,0.18)] md:size-48">
             <div className="text-center">
-              <Sparkles className="mx-auto size-6 text-brand-light" strokeWidth={1.5} />
-              <p className="mt-3 font-display text-xl font-semibold tracking-[-0.05em]">KUENTRA</p>
-              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.2em] text-white/45">Digital hub</p>
+              <BrandMark className="mx-auto size-16 md:size-20" />
+              <p className="mt-3 font-brand text-lg font-semibold tracking-[-0.055em]">Kuentra</p>
+              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.2em] text-muted">Digital hub</p>
             </div>
           </div>
           {[

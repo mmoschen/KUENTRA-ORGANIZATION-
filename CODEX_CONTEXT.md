@@ -57,7 +57,7 @@ No implementar todavía carrito, checkout, Mercado Pago, autenticación, usuario
 ## Pendientes antes de producción
 
 1. Reemplazar los enlaces de WhatsApp de muestra (`5491100000000`) por el número oficial.
-2. Reemplazar el wordmark tipográfico temporal por el archivo vectorial oficial del logo cuando esté disponible. La captura recibida se conserva sólo como referencia interna.
+2. El isotipo oficial extraído de la referencia está integrado como PNG transparente. Reemplazarlo por el archivo vectorial original cuando esté disponible para máxima fidelidad y escalabilidad.
 3. Reemplazar precios y testimonios mock por datos aprobados.
 4. Crear páginas `/productos` y `/productos/[slug]` únicamente después de validar visualmente la HOME.
 5. Agregar imagen Open Graph y favicon definitivos derivados del asset oficial.

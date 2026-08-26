@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Space_Grotesk } from "next/font/google";
+import { Manrope, Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const bodyFont = Manrope({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 const displayFont = Space_Grotesk({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const brandFont = Sora({ subsets: ["latin"], variable: "--font-kuentra", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kuentra.com.ar"),
   title: { default: "Kuentra | Servicios digitales más simples", template: "%s | Kuentra" },
   description: "Accedé a ChatGPT, Gemini, CapCut, Canva y más servicios digitales con activación rápida y soporte real en Argentina.",
+  icons: { icon: "/kuentra-mark.png", apple: "/kuentra-mark.png" },
   alternates: { canonical: "/" },
   openGraph: {
     title: "Kuentra | Tus servicios digitales, más simples",
@@ -24,5 +26,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#071B2E" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es" className="scroll-smooth"><body className={`${bodyFont.variable} ${displayFont.variable}`}>{children}</body></html>;
+  return <html lang="es" className="scroll-smooth"><body className={`${bodyFont.variable} ${displayFont.variable} ${brandFont.variable}`}>{children}</body></html>;
 }
