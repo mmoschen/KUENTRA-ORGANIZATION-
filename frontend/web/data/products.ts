@@ -13,7 +13,7 @@ export const products: Product[] = [
     shortDescription: "Tu asistente de IA para estudiar, trabajar y crear.",
     description: "Accedé a funciones avanzadas de inteligencia artificial con acompañamiento real de Kuentra.",
     plans: [
-      { id: "chatgpt-shared", name: "Compartido", duration: "1 mes", price: 12900 },
+      { id: "chatgpt-shared", name: "Compartido", duration: "1 mes", price: 12500 },
       { id: "chatgpt-individual", name: "Individual", duration: "1 mes", price: 34900 },
     ],
   },
@@ -26,9 +26,9 @@ export const products: Product[] = [
     featured: true,
     badge: "Nuevo",
     referencePriceUsd: 19.99,
-    shortDescription: "Ideas, análisis y productividad con la IA de Google.",
+    shortDescription: "Ideas, análisis y productividad con IA. Incluye Google One.",
     description: "Una herramienta potente para investigar, redactar y resolver tareas complejas.",
-    plans: [{ id: "gemini-monthly", name: "Individual", duration: "1 mes", price: 16900 }],
+    plans: [{ id: "gemini-monthly", name: "Individual", duration: "1 mes", price: 9800 }],
   },
   {
     id: "capcut-pro",
@@ -37,7 +37,7 @@ export const products: Product[] = [
     category: "Diseño",
     icon: "scissors",
     featured: true,
-    referencePriceUsd: 9.99,
+    referencePriceUsd: 19.99,
     shortDescription: "Edición profesional para contenido y redes sociales.",
     description: "Creá videos más rápido con herramientas premium de edición y recursos exclusivos.",
     plans: [
@@ -52,10 +52,11 @@ export const products: Product[] = [
     category: "Diseño",
     icon: "palette",
     featured: true,
-    referencePriceUsd: 120,
+    referencePriceArs: 9300,
+    planOptions: ["1 mes", "3 meses"],
     shortDescription: "Diseñá piezas claras, rápidas y listas para publicar.",
     description: "Plantillas, recursos premium y herramientas de marca para todos tus proyectos.",
-    plans: [{ id: "canva-year", name: "Individual", duration: "12 meses", price: 14900 }],
+    plans: [{ id: "canva-monthly", name: "Individual", duration: "1 mes", price: 14900 }],
   },
   {
     id: "perplexity-pro",
@@ -67,7 +68,7 @@ export const products: Product[] = [
     referencePriceUsd: 20,
     shortDescription: "Investigá con fuentes y encontrá respuestas precisas.",
     description: "Búsqueda avanzada asistida por IA para aprender, comparar y decidir mejor.",
-    plans: [{ id: "perplexity-monthly", name: "Pro", duration: "1 mes", price: 12900 }],
+    plans: [{ id: "perplexity-monthly", name: "Individual", duration: "1 mes", price: 12900 }],
   },
 ];
 

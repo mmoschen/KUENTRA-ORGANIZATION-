@@ -19,7 +19,7 @@ export function FeaturedProducts({ officialDollarRate }: { officialDollarRate?: 
         <div className="product-grid mt-14 md:mt-20">
           {products.map((product, index) => <ProductCard key={product.id} product={product} index={index} officialDollarRate={officialDollarRate} />)}
         </div>
-        <p className="mt-5 text-xs leading-5 text-muted">Los precios oficiales estimados incluyen la percepción vigente para servicios del exterior y se calculan con el dólar vendedor informado por el BCRA. El importe final de la tarjeta puede variar según la fecha de cierre.</p>
+        <p className="mt-5 text-xs leading-5 text-muted">Las referencias en USD incluyen la percepción vigente para servicios del exterior y se calculan con el dólar vendedor informado por el BCRA. Los precios publicados en ARS corresponden a la tarifa local informada por cada plataforma.</p>
         <div className="mt-8 flex justify-end">
           <a className="text-link" href="#contacto">Explorar todos los servicios <ArrowRight className="size-4" /></a>
         </div>
@@ -33,7 +33,10 @@ export function BrandStatement() {
     <section className="overflow-hidden border-y border-line bg-white py-28 md:py-44">
       <div className="site-container">
         <p className="eyebrow text-muted">Una forma más simple</p>
-        <h2 className="brand-statement mt-8">Todo lo que usás.<br /><span>En un solo lugar.</span></h2>
+        <h2 className="brand-statement mt-8">
+          <span className="block">Todo lo que usás.</span>
+          <span className="block">En un solo lugar.</span>
+        </h2>
         <div className="mt-14 grid gap-8 border-t border-line pt-8 md:grid-cols-[1fr_1fr_1fr]">
           <p className="eyebrow text-muted">Kuentra / Digital services</p>
           <p className="max-w-sm text-lg leading-7 text-ink">Menos tiempo comparando opciones. Más tiempo usando herramientas que te ayudan a avanzar.</p>

@@ -18,6 +18,8 @@ export interface Product {
   featured: boolean;
   badge?: string;
   referencePriceUsd?: number;
+  referencePriceArs?: number;
+  planOptions?: string[];
   plans: Plan[];
 }
 
