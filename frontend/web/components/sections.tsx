@@ -2,28 +2,13 @@ import { ArrowRight, BadgeCheck, Bolt, Headphones, MessageCircle, ShieldCheck, S
 import { products } from "@/data/products";
 import { faqs, testimonials } from "@/data/content";
 import { ProductCard } from "./product-card";
+import type { OfficialDollarRate } from "@kuentra/shared";
 
-export function ServiceRail() {
+export function FeaturedProducts({ officialDollarRate }: { officialDollarRate?: OfficialDollarRate }) {
   return (
-    <section className="border-y border-line bg-white" aria-label="Servicios disponibles">
-      <div className="site-container flex min-h-28 items-center gap-8 py-6 max-md:flex-col max-md:items-start">
-        <span className="eyebrow shrink-0 text-muted">Servicios disponibles</span>
-        <div className="grid flex-1 grid-cols-5 gap-x-7 gap-y-5 max-md:w-full max-md:grid-cols-2">
-          {products.map((product, index) => (
-            <span key={product.id} className={`font-display text-lg font-semibold tracking-[-0.04em] text-ink/35 transition-colors hover:text-ink ${index === products.length - 1 ? "max-md:col-span-2" : ""}`}>
-              {product.name.replace(" Pro", "").replace(" Plus", "")}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function FeaturedProducts() {
-  return (
-    <section id="productos" className="section-space scroll-mt-24 bg-canvas">
+    <section id="productos" className="catalog-section scroll-mt-24">
       <div className="site-container">
+        <div className="catalog-divider" aria-hidden="true" />
         <div className="section-heading-row">
           <div>
             <p className="eyebrow text-brand">Catálogo / Selección</p>
@@ -32,8 +17,9 @@ export function FeaturedProducts() {
           <p className="section-intro">Elegimos servicios que realmente suman a tu día. Opciones claras, acompañamiento humano y sin vueltas.</p>
         </div>
         <div className="product-grid mt-14 md:mt-20">
-          {products.map((product, index) => <ProductCard key={product.id} product={product} index={index} />)}
+          {products.map((product, index) => <ProductCard key={product.id} product={product} index={index} officialDollarRate={officialDollarRate} />)}
         </div>
+        <p className="mt-5 text-xs leading-5 text-muted">Los precios oficiales estimados incluyen la percepción vigente para servicios del exterior y se calculan con el dólar vendedor informado por el BCRA. El importe final de la tarjeta puede variar según la fecha de cierre.</p>
         <div className="mt-8 flex justify-end">
           <a className="text-link" href="#contacto">Explorar todos los servicios <ArrowRight className="size-4" /></a>
         </div>

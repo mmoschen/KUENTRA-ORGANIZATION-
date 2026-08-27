@@ -5,11 +5,11 @@ export function BrandMark({ className = "size-9" }: { className?: string }) {
   return (
     <span className={`relative block shrink-0 ${className}`}>
       <Image
-        src="/kuentra-mark.png"
+        src="/kuentra-mark.svg"
         alt=""
         fill
         sizes="80px"
-        className="scale-[1.72] object-contain"
+        className="object-contain"
         priority
       />
     </span>

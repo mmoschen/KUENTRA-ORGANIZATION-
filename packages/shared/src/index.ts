@@ -17,5 +17,14 @@ export interface Product {
   icon: "sparkles" | "gem" | "scissors" | "palette" | "search";
   featured: boolean;
   badge?: string;
+  referencePriceUsd?: number;
   plans: Plan[];
+}
+
+export interface OfficialDollarRate {
+  source: "BCRA";
+  arsPerUsd: number;
+  foreignServicePerceptionRate: number;
+  rateDate: string;
+  fetchedAt: string;
 }

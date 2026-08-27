@@ -10,8 +10,11 @@ export function Hero() {
             <span className="size-1.5 rounded-full bg-brand shadow-[0_0_0_4px_rgba(76,157,219,0.12)]" />
             Servicios digitales / Argentina
           </div>
-          <h1 className="mt-9 max-w-[890px] font-display text-[clamp(4rem,7.3vw,7.3rem)] font-medium leading-[0.86] tracking-[-0.078em] text-ink">
-            Tus servicios<br />digitales. <span className="text-brand">Más simples.</span><br />Más accesibles.
+          <h1 className="mt-9 max-w-[760px] font-display text-[clamp(3.5rem,5.2vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.078em] text-ink">
+            <span className="block">Tus servicios</span>
+            <span className="block">digitales.</span>
+            <span className="block text-brand">Más simples.</span>
+            <span className="block">Más accesibles.</span>
           </h1>
           <p className="mt-8 max-w-xl text-[17px] leading-7 text-muted md:text-xl md:leading-8">Accedé a herramientas como ChatGPT, Gemini, CapCut y más desde un solo lugar.</p>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -45,7 +48,15 @@ export function Hero() {
             </div>
           ))}
           <div className="absolute inset-x-[8%] bottom-0 flex items-center justify-between border-t border-ink/10 pt-3 font-mono text-[8px] uppercase tracking-[0.16em] text-muted">
-            <span>System online</span><span>Buenos Aires / AR</span>
+            <span>Servicios activos</span>
+            <span className="flex items-center gap-1.5">
+              <span aria-hidden="true" className="inline-grid h-2 w-3 overflow-hidden rounded-[1px] border border-ink/10 bg-white">
+                <i className="bg-[#75c9ee]" />
+                <i className="bg-white" />
+                <i className="bg-[#75c9ee]" />
+              </span>
+              Argentina
+            </span>
           </div>
         </div>
       </div>

@@ -1,12 +1,15 @@
-import type { Product } from "@kuentra/shared";
+import type { OfficialDollarRate, Product } from "@kuentra/shared";
 import { ArrowUpRight, Gem, Palette, Scissors, Search, Sparkles } from "lucide-react";
 import { formatPrice } from "@/data/products";
 
 const icons = { sparkles: Sparkles, gem: Gem, scissors: Scissors, palette: Palette, search: Search };
 
-export function ProductCard({ product, index }: { product: Product; index: number }) {
+export function ProductCard({ product, index, officialDollarRate }: { product: Product; index: number; officialDollarRate?: OfficialDollarRate }) {
   const Icon = icons[product.icon];
   const price = Math.min(...product.plans.map((plan) => plan.price));
+  const referencePrice = product.referencePriceUsd && officialDollarRate
+    ? Math.round((product.referencePriceUsd * officialDollarRate.arsPerUsd * (1 + officialDollarRate.foreignServicePerceptionRate)) / 100) * 100
+    : undefined;
   const prominent = index === 0;
 
   return (
@@ -27,9 +30,20 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           <ArrowUpRight className="size-4.5" />
         </a>
       </div>
-      <div className="mt-10 flex items-end justify-between border-t border-current/12 pt-5">
-        <span className="eyebrow !text-current/45">Desde</span>
-        <span className="font-display text-xl font-semibold tracking-[-0.04em]">{formatPrice(price)}</span>
+      <div className="mt-10 grid grid-cols-[1fr_auto] items-end gap-4 border-t border-current/12 pt-5">
+        <div>
+          <span className="eyebrow !text-current/45">Precio oficial estimado</span>
+          {referencePrice && officialDollarRate ? (
+            <>
+              <p className="mt-2 font-display text-lg font-medium tracking-[-0.04em] opacity-55 line-through">{formatPrice(referencePrice)}</p>
+              <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.12em] opacity-45">USD {product.referencePriceUsd} + {officialDollarRate.foreignServicePerceptionRate * 100}% · BCRA</p>
+            </>
+          ) : <p className="mt-2 text-sm opacity-45">Actualizando...</p>}
+        </div>
+        <div className="text-right">
+          <span className="eyebrow !text-current/65">Kuentra desde</span>
+          <p className="mt-2 font-display text-xl font-semibold tracking-[-0.04em]">{formatPrice(price)}</p>
+        </div>
       </div>
     </article>
   );

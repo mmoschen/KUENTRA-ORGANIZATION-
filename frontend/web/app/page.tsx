@@ -1,16 +1,31 @@
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
-import { BrandStatement, FAQ, FeaturedProducts, FinalCTA, HowItWorks, ServiceRail, Testimonials, Trust } from "@/components/sections";
+import { BrandStatement, FAQ, FeaturedProducts, FinalCTA, HowItWorks, Testimonials, Trust } from "@/components/sections";
+import { WhatsAppButton } from "@/components/whatsapp-button";
+import type { OfficialDollarRate } from "@kuentra/shared";
 
-export default function Home() {
+const pricingApiUrl = process.env.KUENTRA_API_URL ?? "http://localhost:4000";
+
+async function getOfficialDollarRate(): Promise<OfficialDollarRate | undefined> {
+  try {
+    const response = await fetch(`${pricingApiUrl}/pricing/reference`, { next: { revalidate: 60 * 60 } });
+    if (!response.ok) return undefined;
+    return response.json() as Promise<OfficialDollarRate>;
+  } catch {
+    return undefined;
+  }
+}
+
+export default async function Home() {
+  const officialDollarRate = await getOfficialDollarRate();
+
   return (
     <>
       <SiteHeader />
       <main>
         <Hero />
-        <ServiceRail />
-        <FeaturedProducts />
+        <FeaturedProducts officialDollarRate={officialDollarRate} />
         <BrandStatement />
         <HowItWorks />
         <Trust />
@@ -19,6 +34,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }

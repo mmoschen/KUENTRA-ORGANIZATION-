@@ -38,6 +38,8 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 
 .site-container { width: min(100% - 2rem, 1240px); margin-inline: auto; }
 .section-space { padding-block: clamp(6.5rem, 12vw, 11rem); }
+.catalog-section { padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(6.5rem, 12vw, 11rem); background: linear-gradient(180deg, var(--ice) 0, var(--canvas) 12rem); }
+.catalog-divider { height: 1px; margin-bottom: clamp(2rem, 3vw, 3rem); background: linear-gradient(90deg, transparent, rgba(76,157,219,.42), transparent); }
 .eyebrow { font-family: var(--font-body), sans-serif; font-size: 10px; line-height: 1; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
 .section-title { max-width: 820px; font-family: var(--font-display), sans-serif; font-size: clamp(3rem, 6.1vw, 6rem); font-weight: 500; line-height: 0.91; letter-spacing: -0.065em; }
 .section-heading-row { display: grid; align-items: end; gap: 2.5rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--line); }
@@ -61,6 +63,10 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .hero-console > div:nth-child(5) { animation: float 6.2s .6s ease-in-out infinite; }
 .hero-console > div:nth-child(6) { animation: float 5.4s .4s ease-in-out infinite reverse; }
 
+.whatsapp-button { animation: whatsapp-pulse 7s ease-out infinite; }
+.whatsapp-icon { animation: whatsapp-spin 7s cubic-bezier(.2,.8,.2,1) infinite; }
+.whatsapp-trail { animation: whatsapp-trail 7s ease-out infinite; }
+
 .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
 .product-card { min-height: 455px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-card); background: white; padding: clamp(1.35rem,3vw,2rem); color: var(--ink); transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease; }
 .product-card:hover { transform: translateY(-5px); border-color: rgba(76,157,219,.55); box-shadow: 0 22px 55px rgba(12,56,104,.08); }
@@ -68,6 +74,9 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .product-card--prominent:hover { border-color: var(--brand-light); }
 
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes whatsapp-spin { 0%,68%,100% { transform: rotate(0); } 74% { transform: rotate(-20deg); } 88% { transform: rotate(720deg); } 92% { transform: rotate(720deg); } }
+@keyframes whatsapp-trail { 0%,68%,100% { opacity: 0; transform: scale(.7); } 73% { opacity: .95; transform: scale(.88); } 91% { opacity: 0; transform: scale(1.95); } }
+@keyframes whatsapp-pulse { 0%,68%,100% { box-shadow: 0 14px 32px rgba(37,211,102,.38); } 76% { box-shadow: 0 0 0 11px rgba(37,211,102,.18), 0 16px 36px rgba(37,211,102,.55); } 90% { box-shadow: 0 0 0 22px rgba(37,211,102,0), 0 14px 32px rgba(37,211,102,.38); } }
 
 @media (min-width: 768px) {
   .site-container { width: min(100% - 4rem, 1240px); }
