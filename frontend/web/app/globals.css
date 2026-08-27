@@ -38,6 +38,7 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 
 .site-container { width: min(100% - 2rem, 1240px); margin-inline: auto; }
 .section-space { padding-block: clamp(6.5rem, 12vw, 11rem); }
+.testimonials-section { padding-block: clamp(4.5rem, 7vw, 6.5rem); }
 .catalog-section { padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(4rem, 6vw, 6rem); background: linear-gradient(180deg, var(--ice) 0, var(--canvas) 12rem); }
 .catalog-divider { height: 1px; margin-bottom: clamp(2rem, 3vw, 3rem); background: linear-gradient(90deg, transparent, rgba(76,157,219,.42), transparent); }
 .process-section { padding-top: clamp(4.5rem, 7vw, 6rem); padding-bottom: clamp(5rem, 8vw, 7rem); }
@@ -63,6 +64,7 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .hero-console > div:nth-child(4) { animation: float 5.8s .2s ease-in-out infinite reverse; }
 .hero-console > div:nth-child(5) { animation: float 6.2s .6s ease-in-out infinite; }
 .hero-console > div:nth-child(6) { animation: float 5.4s .4s ease-in-out infinite reverse; }
+.hero-orbit-deep { min-width: 120px !important; padding: .7rem !important; opacity: .46; filter: saturate(.78); animation: float-deep 7.2s ease-in-out infinite; }
 
 .whatsapp-button { animation: whatsapp-pulse 7s ease-out infinite; }
 .whatsapp-icon { animation: whatsapp-spin 7s cubic-bezier(.2,.8,.2,1) infinite; }
@@ -75,6 +77,7 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .product-card--prominent:hover { border-color: var(--brand-light); }
 
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes float-deep { 0%,100% { transform: scale(.84) translateY(0); } 50% { transform: scale(.84) translateY(-5px); } }
 @keyframes whatsapp-spin { 0%,68%,100% { transform: rotate(0); } 74% { transform: rotate(-20deg); } 88% { transform: rotate(720deg); } 92% { transform: rotate(720deg); } }
 @keyframes whatsapp-trail { 0%,68%,100% { opacity: 0; transform: scale(.7); } 73% { opacity: .95; transform: scale(.88); } 91% { opacity: 0; transform: scale(1.95); } }
 @keyframes whatsapp-pulse { 0%,68%,100% { box-shadow: 0 14px 32px rgba(37,211,102,.38); } 76% { box-shadow: 0 0 0 11px rgba(37,211,102,.18), 0 16px 36px rgba(37,211,102,.55); } 90% { box-shadow: 0 0 0 22px rgba(37,211,102,0), 0 14px 32px rgba(37,211,102,.38); } }

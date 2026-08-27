@@ -1,7 +1,17 @@
 import "reflect-metadata";
-import { Controller, Get, Module, ServiceUnavailableException } from "@nestjs/common";
+import "dotenv/config";
+import { Controller, Get, Module, ServiceUnavailableException, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { APP_GUARD } from "@nestjs/core";
+import type { NestExpressApplication } from "@nestjs/platform-express";
+import helmet from "helmet";
 import type { OfficialDollarRate } from "@kuentra/shared";
+import { AdminApiKeyGuard } from "./admin-api-key.guard.js";
+import { ApiRateLimitGuard } from "./api-rate-limit.guard.js";
+import { DatabaseService } from "./database.service.js";
+import { RateLimitService } from "./rate-limit.service.js";
+import { ReviewsController } from "./reviews.controller.js";
+import { ReviewsService } from "./reviews.service.js";
 
 const BCRA_VARIABLES_URL = "https://api.bcra.gob.ar/estadisticas/v4.0/monetarias?categoria=Principales%20Variables&limit=1000";
 const CACHE_DURATION_MS = 12 * 60 * 60 * 1000;
@@ -47,12 +57,34 @@ class PricingController {
   }
 }
 
-@Module({ controllers: [PricingController] })
+@Module({
+  controllers: [PricingController, ReviewsController],
+  providers: [
+    DatabaseService,
+    ReviewsService,
+    RateLimitService,
+    AdminApiKeyGuard,
+    {
+      provide: APP_GUARD,
+      useFactory: (rateLimit: RateLimitService) => new ApiRateLimitGuard(rateLimit),
+      inject: [RateLimitService],
+    },
+  ],
+})
 class AppModule {}
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.enableCors({ origin: process.env.CORS_ORIGIN?.split(",") ?? ["http://localhost:3000"] });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const allowedOrigins = process.env.CORS_ORIGIN?.split(",").map((origin) => origin.trim()) ?? ["http://localhost:3000"];
+  app.set("trust proxy", 1);
+  app.use(helmet({ crossOriginResourcePolicy: false }));
+  app.enableCors({
+    origin: (origin: string | undefined, callback: (error: Error | null, allow?: boolean) => void) => callback(null, !origin || allowedOrigins.includes(origin)),
+    methods: ["GET", "POST", "PATCH"],
+    allowedHeaders: ["Content-Type", "x-admin-api-key", "x-admin-name"],
+    maxAge: 86_400,
+  });
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
   await app.listen(Number(process.env.PORT ?? 4000));
 }
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { products } from "@/data/products";
 import { faqs, testimonials } from "@/data/content";
 import { ProductCard } from "./product-card";
+import { ReviewsExperience } from "./reviews-experience";
 import type { OfficialDollarRate } from "@kuentra/shared";
 
 export function FeaturedProducts({ officialDollarRate }: { officialDollarRate?: OfficialDollarRate }) {
@@ -66,30 +67,16 @@ export function HowItWorks() {
 
 export function Testimonials() {
   return (
-    <section id="opiniones" className="section-space scroll-mt-20 border-t border-line bg-white">
+    <section id="opiniones" className="testimonials-section scroll-mt-20 border-t border-line bg-white">
       <div className="site-container">
         <div className="section-heading-row">
           <div>
             <p className="eyebrow text-brand">Opiniones / Comunidad</p>
-            <h2 className="section-title mt-5">Lo simple<br />se nota.</h2>
+            <h2 className="mt-4 max-w-2xl font-display text-[clamp(3rem,4.8vw,5.25rem)] font-medium leading-[.94] tracking-[-0.07em] text-ink">Lo simple se nota.</h2>
           </div>
           <p className="section-intro">Experiencias de personas que usan Kuentra para estudiar, crear y trabajar mejor.</p>
         </div>
-        <div className="mt-16 grid gap-4 md:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <figure key={testimonial.name} className="flex min-h-[330px] flex-col justify-between rounded-card border border-line bg-canvas p-7 md:p-8">
-              <div>
-                <span className="font-mono text-[11px] tracking-[0.16em] text-brand">KUENTRA / {String(index + 1).padStart(2, "0")}</span>
-                <blockquote className="mt-8 font-display text-[22px] leading-[1.28] tracking-[-0.035em] text-ink">“{testimonial.quote}”</blockquote>
-              </div>
-              <figcaption className="mt-10 border-t border-line pt-5">
-                <p className="text-sm font-bold text-ink">{testimonial.name}</p>
-                <p className="mt-1 text-sm text-muted">{testimonial.role}</p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-5 text-xs text-muted">Testimonios de muestra — preparados para reemplazarse por opiniones verificadas.</p>
+        <ReviewsExperience fallback={testimonials} />
       </div>
     </section>
   );

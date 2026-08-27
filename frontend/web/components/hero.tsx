@@ -38,11 +38,12 @@ export function Hero() {
           </div>
           {[
             ["ChatGPT", "AI / 01", "left-[2%] top-[18%]"],
-            ["Gemini", "AI / 02", "right-[0%] top-[26%]"],
+            ["Gemini", "AI / 02", "right-[0%] top-[31%]"],
             ["CapCut", "DESIGN / 03", "bottom-[13%] right-[4%]"],
             ["Canva", "DESIGN / 04", "bottom-[9%] left-[3%]"],
-          ].map(([name, code, position]) => (
-            <div key={name} className={`absolute ${position} min-w-[126px] rounded-xl border border-line bg-white/90 p-3.5 shadow-[0_12px_40px_rgba(12,56,104,0.08)] backdrop-blur md:min-w-[148px]`}>
+            ["Disney+", "STREAM / 06", "right-[19%] top-[12%]", "hero-orbit-deep"],
+          ].map(([name, code, position, depth]) => (
+            <div key={name} className={`absolute ${position} ${depth ?? ""} min-w-[126px] rounded-xl border border-line bg-white/90 p-3.5 shadow-[0_12px_40px_rgba(12,56,104,0.08)] backdrop-blur md:min-w-[148px]`}>
               <p className="font-display text-sm font-bold tracking-[-0.035em] text-ink">{name}</p>
               <p className="mt-1 font-mono text-[8px] tracking-[0.13em] text-muted">{code}</p>
             </div>
