@@ -70,6 +70,18 @@ export const products: Product[] = [
     description: "Búsqueda avanzada asistida por IA para aprender, comparar y decidir mejor.",
     plans: [{ id: "perplexity-monthly", name: "Individual", duration: "1 mes", price: 12900 }],
   },
+  {
+    id: "disney-plus",
+    name: "Disney+ Premium 4K",
+    slug: "disney-plus",
+    category: "Streaming",
+    icon: "clapperboard",
+    featured: true,
+    referencePriceArs: 23999,
+    shortDescription: "Disney, ESPN y F1, con calidad 4K para disfrutar en un solo lugar.",
+    description: "Accedé a Disney+ Premium 4K, con ESPN y F1, en una cuenta compartida con acompañamiento de Kuentra.",
+    plans: [{ id: "disney-shared", name: "Compartido", duration: "1 mes", price: 6800 }],
+  },
 ];
 
 export const formatPrice = (price: number) =>

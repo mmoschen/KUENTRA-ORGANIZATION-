@@ -1,4 +1,5 @@
-import { ArrowRight, BadgeCheck, Bolt, Headphones, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, CreditCard, KeyRound, MessageCircle, MousePointer2, Sparkles, type LucideIcon } from "lucide-react";
+import Image from "next/image";
 import { products } from "@/data/products";
 import { faqs, testimonials } from "@/data/content";
 import { ProductCard } from "./product-card";
@@ -19,92 +20,45 @@ export function FeaturedProducts({ officialDollarRate }: { officialDollarRate?: 
         <div className="product-grid mt-14 md:mt-20">
           {products.map((product, index) => <ProductCard key={product.id} product={product} index={index} officialDollarRate={officialDollarRate} />)}
         </div>
-        <p className="mt-5 text-xs leading-5 text-muted">Las referencias en USD incluyen la percepción vigente para servicios del exterior y se calculan con el dólar vendedor informado por el BCRA. Los precios publicados en ARS corresponden a la tarifa local informada por cada plataforma.</p>
-        <div className="mt-8 flex justify-end">
-          <a className="text-link" href="#contacto">Explorar todos los servicios <ArrowRight className="size-4" /></a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function BrandStatement() {
-  return (
-    <section className="overflow-hidden border-y border-line bg-white py-28 md:py-44">
-      <div className="site-container">
-        <p className="eyebrow text-muted">Una forma más simple</p>
-        <h2 className="brand-statement mt-8">
-          <span className="block">Todo lo que usás.</span>
-          <span className="block">En un solo lugar.</span>
-        </h2>
-        <div className="mt-14 grid gap-8 border-t border-line pt-8 md:grid-cols-[1fr_1fr_1fr]">
-          <p className="eyebrow text-muted">Kuentra / Digital services</p>
-          <p className="max-w-sm text-lg leading-7 text-ink">Menos tiempo comparando opciones. Más tiempo usando herramientas que te ayudan a avanzar.</p>
-          <p className="max-w-sm text-[15px] leading-6 text-muted md:justify-self-end">Una experiencia organizada para acceder, activar y resolver todo desde el mismo lugar.</p>
-        </div>
+        <p className="mx-auto mt-5 max-w-4xl text-center text-xs leading-5 text-muted">Las referencias en USD incluyen la percepción vigente para servicios del exterior y se calculan con el dólar vendedor informado por el BCRA. Los precios publicados en ARS corresponden a la tarifa local informada por cada plataforma.</p>
       </div>
     </section>
   );
 }
 
 export function HowItWorks() {
-  const steps = [
-    ["01", "Elegís tu servicio", "Explorás las opciones y encontrás la que mejor acompaña lo que querés hacer."],
-    ["02", "Coordinás el pago", "Confirmamos el plan, el valor y cada detalle antes de avanzar."],
-    ["03", "Recibís tu acceso", "Te guiamos durante la activación y seguimos disponibles si necesitás ayuda."],
+  const steps: Array<[string, LucideIcon, string, string]> = [
+    ["01", MousePointer2, "Elegís tu servicio", "Explorás las opciones y encontrás la que mejor acompaña lo que querés hacer."],
+    ["02", CreditCard, "Coordinás el pago", "Confirmamos el plan, el valor y cada detalle antes de avanzar."],
+    ["03", KeyRound, "Recibís tu acceso", "Te guiamos durante la activación y seguimos disponibles si necesitás ayuda."],
   ];
   return (
-    <section id="como-funciona" className="section-space scroll-mt-20 bg-ink text-white">
+    <section id="como-funciona" className="section-space process-section scroll-mt-20 bg-ink text-white">
       <div className="site-container">
         <div className="section-heading-row border-white/15">
           <div>
             <p className="eyebrow text-brand-light">Proceso / 01—03</p>
             <h2 className="section-title mt-5 text-white">Simple desde<br />el primer paso.</h2>
           </div>
-          <p className="section-intro !text-white/55">Sin formularios eternos ni procesos confusos. Sabés qué sigue en cada momento.</p>
+          <div className="flex flex-col items-center">
+            <Image src="/mascota.png" alt="Mascota de Kuentra" width={1974} height={797} className="mb-2 w-52 sm:w-64 md:w-80" />
+            <p className="section-intro text-center !text-white/55">Sin formularios eternos ni procesos confusos. Sabés qué sigue en cada momento.</p>
+          </div>
         </div>
-        <ol className="mt-16 grid border-y border-white/15 md:grid-cols-3">
-          {steps.map(([number, title, copy]) => (
-            <li key={number} className="group relative min-h-80 border-white/15 px-1 py-9 md:min-h-96 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0">
-              <span className="font-mono text-xs tracking-[0.18em] text-brand-light">{number}</span>
-              <div className="absolute bottom-9 left-1 right-4 md:left-8 md:first:left-0">
+        <ol className="mt-12 grid border-y border-white/15 md:grid-cols-3">
+          {steps.map(([number, Icon, title, copy]) => (
+            <li key={number} className="group min-h-56 border-white/15 px-1 py-8 md:min-h-64 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs tracking-[0.18em] text-brand-light">{number}</span>
+                <Icon className="size-5 text-brand-light" strokeWidth={1.7} />
+              </div>
+              <div className="mt-14">
                 <h3 className="font-display text-2xl font-medium tracking-[-0.04em]">{title}</h3>
                 <p className="mt-4 max-w-xs text-[15px] leading-6 text-white/50">{copy}</p>
               </div>
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-export function Trust() {
-  const benefits = [
-    [Bolt, "Activación rápida", "Te informamos el tiempo real antes de confirmar."],
-    [Headphones, "Soporte humano", "Una persona te acompaña cuando lo necesitás."],
-    [ShieldCheck, "Garantía Kuentra", "Respondemos ante problemas con tu servicio."],
-    [BadgeCheck, "Todo claro", "Planes, vigencia y condiciones sin letra chica."],
-  ];
-  return (
-    <section className="section-space bg-canvas">
-      <div className="site-container">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow text-brand">Acompañamiento real</p>
-          <h2 className="section-title mt-5">Tecnología, sin sentirte solo.</h2>
-        </div>
-        <div className="mt-14 grid border-y border-line md:grid-cols-4">
-          {benefits.map(([Icon, title, copy], index) => {
-            const BenefitIcon = Icon as typeof Bolt;
-            return (
-              <div key={title as string} className={`min-h-60 py-8 md:px-7 ${index > 0 ? "border-t border-line md:border-l md:border-t-0" : ""}`}>
-                <BenefitIcon className="size-5 text-brand" strokeWidth={1.8} />
-                <h3 className="mt-16 font-display text-xl font-semibold tracking-[-0.04em]">{title as string}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted">{copy as string}</p>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );

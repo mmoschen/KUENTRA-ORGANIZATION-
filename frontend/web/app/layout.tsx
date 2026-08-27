@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora, Space_Grotesk } from "next/font/google";
+import { PageTitleSwitcher } from "@/components/page-title-switcher";
 import "./globals.css";
 
 const bodyFont = Manrope({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -26,5 +27,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#071B2E" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es" className="scroll-smooth"><body className={`${bodyFont.variable} ${displayFont.variable} ${brandFont.variable}`}>{children}</body></html>;
+  return <html lang="es" className="scroll-smooth"><body className={`${bodyFont.variable} ${displayFont.variable} ${brandFont.variable}`}><PageTitleSwitcher />{children}</body></html>;
 }

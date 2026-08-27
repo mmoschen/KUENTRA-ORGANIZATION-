@@ -1,7 +1,7 @@
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 import { SiteHeader } from "@/components/site-header";
-import { BrandStatement, FAQ, FeaturedProducts, FinalCTA, HowItWorks, Testimonials, Trust } from "@/components/sections";
+import { FAQ, FeaturedProducts, FinalCTA, HowItWorks, Testimonials } from "@/components/sections";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import type { OfficialDollarRate } from "@kuentra/shared";
 
@@ -26,9 +26,7 @@ export default async function Home() {
       <main>
         <Hero />
         <FeaturedProducts officialDollarRate={officialDollarRate} />
-        <BrandStatement />
         <HowItWorks />
-        <Trust />
         <Testimonials />
         <FAQ />
         <FinalCTA />

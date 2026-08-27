@@ -1,8 +1,8 @@
 import type { OfficialDollarRate, Product } from "@kuentra/shared";
-import { ArrowUpRight, Gem, Palette, Scissors, Search, Sparkles } from "lucide-react";
+import { ArrowUpRight, Clapperboard, Gem, Palette, Scissors, Search, Sparkles } from "lucide-react";
 import { formatPrice } from "@/data/products";
 
-const icons = { sparkles: Sparkles, gem: Gem, scissors: Scissors, palette: Palette, search: Search };
+const icons = { sparkles: Sparkles, gem: Gem, scissors: Scissors, palette: Palette, search: Search, clapperboard: Clapperboard };
 
 export function ProductCard({ product, index, officialDollarRate }: { product: Product; index: number; officialDollarRate?: OfficialDollarRate }) {
   const Icon = icons[product.icon];

@@ -14,7 +14,7 @@ export interface Product {
   description: string;
   shortDescription: string;
   category: ProductCategory;
-  icon: "sparkles" | "gem" | "scissors" | "palette" | "search";
+  icon: "sparkles" | "gem" | "scissors" | "palette" | "search" | "clapperboard";
   featured: boolean;
   badge?: string;
   referencePriceUsd?: number;
