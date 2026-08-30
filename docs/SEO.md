@@ -193,3 +193,215 @@ No se debe modificar DNS, Cloudflare ni redirecciones hasta abrir una etapa espe
 - No se modificaron archivos fuera de este documento.
 - Search Console, Cloudflare y Railway no se administraron desde esta auditoría; sus estados se tomaron del contexto proporcionado y de las respuestas públicas observables.
 - No hay métricas de campo de Core Web Vitals en este documento. La medición automática con la API pública de PageSpeed no estuvo disponible por límite de cuota (HTTP 429).
+
+## 9. Análisis de arquitectura de páginas públicas de servicios
+
+**Estado:** análisis realizado el 2026-08-30; no se crearon rutas, no se modificó código y no se considera una implementación SEO.
+
+### Conclusión
+
+El catálogo actual tiene seis servicios, pero sus fichas reúnen, en general, el nombre, una descripción breve, planes, duración y precio. Esa información es útil para elegir dentro de la home, pero no alcanza por sí sola para justificar seis páginas indexables: repetirla en una URL propia produciría contenido escaso y muy similar a las tarjetas.
+
+No se recomienda publicar nuevas páginas ahora. Cuando exista contenido específico aprobado, los primeros candidatos son `ChatGPT Plus` y `CapCut Pro`: ambos tienen más de una alternativa de plan y una intención de consulta más diferenciable dentro del catálogo. El resto debe mantenerse únicamente en la home hasta que se pueda documentar información propia, exacta y revisada. Esta recomendación no implica afirmar volumen de búsqueda ni disponibilidad comercial fuera de lo ya publicado por Kuentra.
+
+### Arquitectura propuesta
+
+Si se aprueban los contenidos necesarios, usar el espacio de nombres `/servicios/` es preferible a rutas de primer nivel. Agrupa el catálogo, comunica que la URL pertenece a Kuentra —no a la marca de terceros— y permite crecer sin convertir la raíz en un listado de marcas.
+
+```text
+/
+/servicios/chatgpt-plus          (candidato de primera etapa; no crear aún)
+/servicios/capcut-pro            (candidato de primera etapa; no crear aún)
+```
+
+No crear por ahora una landing `/servicios/`: duplicaría la función del catálogo de la home si solo repite tarjetas. Evaluarla únicamente cuando haya, como mínimo, varias fichas publicadas y contenido de navegación propio. Tampoco crear ahora rutas para Gemini, Canva, Perplexity ni Disney+.
+
+La home debe conservar la intención amplia de “servicios digitales” y seguir siendo el catálogo comparativo. Cuando una ficha individual se publique, el enlace de su tarjeta debe llevar a su URL; la tarjeta conservará una síntesis breve y la página desarrollará contenido original. Las tarjetas de servicios sin ficha deben continuar llevando al contacto. No cambiar esos enlaces en esta etapa.
+
+Los breadcrumbs no son necesarios mientras no exista una landing `/servicios/`. Si esa landing se crea en el futuro, las fichas podrían usar `Inicio > Servicios > [servicio]` y marcar el último elemento como página actual; hasta entonces, es preferible omitirlos antes que construir una jerarquía ficticia.
+
+### Evaluación por servicio
+
+| Servicio actual | Posible slug | Intención que podría cubrir | ¿Justifica una URL con el contenido actual? | Contenido adicional verificable necesario | Riesgos | Título SEO y H1 tentativos | CTA | Sitemap, canonical y prioridad |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ChatGPT Plus | `chatgpt-plus` | Consulta sobre acceder a ChatGPT Plus mediante Kuentra, con alternativas compartida e individual. | No todavía; es el candidato más fuerte cuando se apruebe contenido propio. | Explicación concreta de qué ofrece Kuentra para cada alternativa publicada, a quién puede servir según los usos ya indicados (estudiar, trabajar y crear), duración, diferencias confirmadas entre planes, pasos de activación aplicables al producto y alcance del acompañamiento. | Alto de thin content si solo replica las dos frases y planes de la tarjeta; duplicación con la home si se reutiliza el mismo texto; no afirmar funciones, límites o condiciones de ChatGPT que Kuentra no haya validado. | `ChatGPT Plus con Kuentra | Kuentra`; H1: `ChatGPT Plus con Kuentra`. | `Consultar por WhatsApp sobre ChatGPT Plus`. | Incluir solo al publicarse con contenido aprobado; canonical `https://kuentra.com.ar/servicios/chatgpt-plus`; prioridad de implementación P1. |
+| Gemini Pro | `gemini-pro` | Consulta sobre Gemini Pro para ideas, análisis, investigación, redacción y tareas complejas a través de Kuentra. | No. La ficha actual solo define un plan individual y una descripción genérica. | Alcance confirmado de la alternativa ofrecida, explicación comprobable de la mención a Google One, proceso específico de activación y contenido propio que no replique la tarjeta. | Alto de thin content; alto de duplicación con la home; riesgo de presentar como característica vigente algo que no esté aprobado o que cambie en el servicio de terceros. | `Gemini Pro con Kuentra | Kuentra`; H1: `Gemini Pro con Kuentra`. | `Consultar por WhatsApp sobre Gemini Pro`. | No incluir ni crear por ahora; canonical futuro `https://kuentra.com.ar/servicios/gemini-pro`; prioridad P2 condicionada a contenido aprobado. |
+| CapCut Pro | `capcut-pro` | Consulta sobre CapCut Pro para edición de video y contenido para redes mediante Kuentra. | No todavía; es el segundo candidato cuando se pueda describir el servicio de forma propia. | Descripción específica y aprobada de las alternativas mensual y trimestral, usos ya publicados (edición de video y redes), proceso de activación aplicable, y aclaraciones comerciales confirmadas que distingan ambas duraciones. | Alto de thin content si se limita a precio y duración; duplicación con el resumen de la home; no enumerar herramientas premium, recursos ni compatibilidades que no estén documentados por Kuentra. | `CapCut Pro con Kuentra | Kuentra`; H1: `CapCut Pro con Kuentra`. | `Consultar por WhatsApp sobre CapCut Pro`. | Incluir solo al publicarse con contenido aprobado; canonical `https://kuentra.com.ar/servicios/capcut-pro`; prioridad P1. |
+| Canva Pro | `canva-pro` | Consulta sobre Canva Pro para diseñar piezas y usar recursos de marca mediante Kuentra. | No. Además, los datos actuales requieren validación: `planOptions` muestra 1 y 3 meses, pero el listado de planes solo contiene un plan de 1 mes. | Resolución de esa diferencia antes de publicar, detalle aprobado de las duraciones realmente ofrecidas, explicación propia de los usos publicados y activación específica. | Alto de thin content y duplicación; riesgo de publicar una duración o condición que no coincida con el catálogo vigente. | `Canva Pro con Kuentra | Kuentra`; H1: `Canva Pro con Kuentra`. | `Consultar por WhatsApp sobre Canva Pro`. | No incluir ni crear por ahora; canonical futuro `https://kuentra.com.ar/servicios/canva-pro`; prioridad P2 después de corregir/validar los datos. |
+| Perplexity Pro | `perplexity-pro` | Consulta sobre Perplexity Pro para investigación y búsqueda asistida con fuentes mediante Kuentra. | No. Tiene un único plan y el texto actual es insuficiente para un documento independiente. | Información propia y confirmada sobre el servicio que Kuentra entrega, activación, duración y ejemplos de uso limitados a investigación, comparación y aprendizaje ya publicados. | Alto de thin content; duplicación casi total con la tarjeta; evitar promesas sobre precisión, fuentes o resultados. | `Perplexity Pro con Kuentra | Kuentra`; H1: `Perplexity Pro con Kuentra`. | `Consultar por WhatsApp sobre Perplexity Pro`. | No incluir ni crear por ahora; canonical futuro `https://kuentra.com.ar/servicios/perplexity-pro`; prioridad P3. |
+| Disney+ Premium 4K | `disney-plus` | Consulta sobre la alternativa Disney+ Premium 4K publicada por Kuentra, con Disney, ESPN y F1. | No. Solo hay un plan compartido y una descripción breve. | Alcance comercial y de activación revisado, condiciones exactas del plan compartido que sea lícito comunicar, duración y una descripción original confirmada. | Muy alto de thin content y duplicación; sensibilidad comercial y de marca por describir una cuenta compartida; no crear una página hasta contar con revisión comercial/legal del contenido. | `Disney+ Premium 4K con Kuentra | Kuentra`; H1: `Disney+ Premium 4K con Kuentra`. | `Consultar por WhatsApp sobre Disney+ Premium 4K`. | No incluir ni crear por ahora; canonical futuro `https://kuentra.com.ar/servicios/disney-plus`; prioridad no programada. |
+
+Los títulos son borradores de arquitectura, no metadata aprobada. Deben ajustarse junto con una description propia y natural de cada página, evitando precios dinámicos, afirmaciones no confirmadas y repetición de la metadata de la home.
+
+### Requisitos comunes antes de indexar una ficha
+
+- Contenido original suficiente para explicar el servicio de Kuentra, no una reproducción de la tarjeta, de la FAQ global ni del sitio de la marca de terceros.
+- Revisión comercial/legal de cada afirmación, plan, duración y modalidad publicada; no añadir precios, garantías, comparaciones, soporte, entrega, testimonios ni preguntas frecuentes que no estén confirmados.
+- Metadata propia: título, description, Open Graph/Twitter y una canonical absoluta autorreferente. La home mantiene `https://kuentra.com.ar/` como canonical y cada ficha usa solamente la suya.
+- Inclusión en `app/sitemap.ts` solo tras ser indexable; usar una fecha de cambio real o no declarar `lastModified` hasta disponer de una fuente confiable. No incluir anclas ni rutas no publicadas.
+- Enlazado interno desde la tarjeta correspondiente y, si se crean, desde una navegación contextual. Mantener el texto de la home como resumen y el de la ficha como desarrollo para evitar canibalización entre “servicios digitales” y cada servicio concreto.
+- No añadir datos estructurados de `Product`, `Offer`, precios, reseñas o valoraciones sin datos confirmados. A futuro, una página publicada podría evaluar `WebPage` y, solo si hay breadcrumbs reales, `BreadcrumbList`, enlazados a la `Organization` existente.
+
+### Orden sugerido de implementación futura
+
+1. Validar con negocio/comercial la información específica disponible para ChatGPT Plus y CapCut Pro; si no alcanza para contenido original, mantenerlos en la home.
+2. Crear y revisar una sola ficha piloto, preferentemente `/servicios/chatgpt-plus`, con contenido aprobado, metadata, canonical, enlace interno y sitemap en la misma etapa.
+3. Medir indexación, consultas y posible solapamiento con la home antes de publicar `/servicios/capcut-pro`.
+4. Resolver la discrepancia de duraciones de Canva Pro y obtener contenido específico para Gemini, Canva y Perplexity antes de reevaluarlos.
+5. Dejar Disney+ Premium 4K como sección de la home hasta contar con revisión comercial/legal y contenido diferencial suficiente.
+
+No se debe publicar una URL individual solo para captar el nombre de una marca o una combinación de keywords. Si los requisitos anteriores no se cumplen, la arquitectura correcta sigue siendo una única home con sus seis secciones de catálogo.
+
+## 10. Especificación de contenido piloto: ChatGPT Plus
+
+**Estado:** especificación editorial realizada el 2026-08-30. La ruta propuesta `/servicios/chatgpt-plus` no existe, no se creó código y esta sección no constituye una implementación ni una aprobación de publicación.
+
+### A. Información confirmada en el proyecto
+
+| Tema | Información confirmada | Fuente |
+| --- | --- | --- |
+| Nombre y categoría | El catálogo nombra el servicio `ChatGPT Plus` y lo clasifica en `IA`. | `frontend/web/data/products.ts` |
+| Descripción actual | La ficha dice: “Tu asistente de IA para estudiar, trabajar y crear” y “Accedé a funciones avanzadas de inteligencia artificial con acompañamiento real de Kuentra”. | `frontend/web/data/products.ts` |
+| Modalidades | El catálogo contiene dos alternativas: `Compartido` e `Individual`. | `frontend/web/data/products.ts` |
+| Duración | Ambas alternativas publicadas indican `1 mes`. | `frontend/web/data/products.ts` |
+| Presencia en catálogo | Es el primer producto destacado y muestra la etiqueta editorial `Más elegido`. La etiqueta existe en la interfaz, pero no debe usarse como afirmación de popularidad en una nueva página sin evidencia comercial. | `frontend/web/data/products.ts`, `frontend/web/components/product-card.tsx` |
+| Proceso general de Kuentra | La home describe el siguiente flujo general: elegir el servicio; coordinar el pago, plan, valor y detalles; recibir el acceso con guía durante la activación. | `frontend/web/components/sections.tsx` |
+| Activación general | La FAQ indica que, después de coordinar el pago, Kuentra guía por WhatsApp y envía instrucciones de activación. También indica que la mayoría de los servicios se activa en el día, pero que el tiempo exacto depende del producto y se informa antes de confirmar. | `frontend/web/data/content.ts` |
+| Soporte general | La FAQ afirma que el soporte continúa después de la activación ante inconvenientes durante la vigencia del servicio. | `frontend/web/data/content.ts` |
+| CTA y canal actual | La tarjeta de ChatGPT Plus lleva a `#contacto` con la etiqueta accesible “Ver opciones de ChatGPT Plus”. La home ofrece CTAs visibles “Hablar por WhatsApp”; el flujo general también menciona coordinación por WhatsApp. | `frontend/web/components/product-card.tsx`, `frontend/web/components/hero.tsx`, `frontend/web/components/sections.tsx`, `frontend/web/components/site-header.tsx` |
+| Contexto de la home | Kuentra se presenta como un sitio de servicios digitales en Argentina y menciona ChatGPT entre las herramientas disponibles desde un solo lugar. | `frontend/web/components/hero.tsx`, `frontend/web/app/layout.tsx` |
+
+Los precios y la referencia de precio presentes en los datos de la tarjeta no se incluyen en esta especificación editorial. No deben trasladarse a una futura página sin confirmar su vigencia, forma de presentación y aprobación comercial en el momento de publicar.
+
+### B. Información faltante o ambigua
+
+- **[REQUIERE CONFIRMACIÓN]** Qué diferencia concreta existe entre las modalidades `Compartido` e `Individual`: forma de acceso, alcance, usuarios, privacidad, límites, restricciones y cualquier condición aplicable.
+- **[REQUIERE CONFIRMACIÓN]** Que la duración de un mes y la disponibilidad de ambas modalidades sigan vigentes al publicar.
+- **[REQUIERE CONFIRMACIÓN]** Precio vigente, moneda, condiciones de pago y si corresponde mostrar o no una referencia de precio. La página no debe heredar valores estáticos sin validación.
+- **[REQUIERE CONFIRMACIÓN]** Aplicación exacta a ChatGPT Plus del proceso general de activación: instrucciones, plazo real, qué se recibe y cualquier requisito previo. La FAQ actual es global; no confirma estos detalles para este producto.
+- **[REQUIERE CONFIRMACIÓN]** Alcance, canal, horario y vigencia del acompañamiento y soporte específico de ChatGPT Plus. La promesa actual es general para los servicios de Kuentra.
+- **[REQUIERE CONFIRMACIÓN]** Qué “funciones avanzadas” se pueden nombrar. No se deben listar funciones, límites, modelos, compatibilidades ni beneficios de ChatGPT sin una fuente interna aprobada.
+- **[REQUIERE CONFIRMACIÓN]** Validez operativa y destino final del enlace de WhatsApp antes de convertirlo en CTA de una página pública.
+- **[REQUIERE CONFIRMACIÓN]** Cualquier FAQ específica, testimonio, garantía, condición comercial o afirmación de que es “más elegido”. No hay respaldo específico de ChatGPT Plus en el proyecto.
+
+### Estructura de contenido propuesta
+
+La siguiente estructura usa texto confirmado cuando es posible. Todo texto entre corchetes exige validación antes de convertirse en contenido público.
+
+#### Metadata y encabezado
+
+- **Title SEO tentativo:** `ChatGPT Plus con Kuentra | Kuentra`
+- **Meta description tentativa:** `Conocé las alternativas de ChatGPT Plus publicadas por Kuentra: modalidad compartida o individual por 1 mes. Consultá los detalles por WhatsApp.`
+- **H1:** `ChatGPT Plus con Kuentra`
+
+El título, la description y el H1 son borradores. Antes de publicar se debe confirmar que la disponibilidad, ambas modalidades y su duración continúan vigentes. La description no debe incorporar precios ni promesas no verificadas.
+
+#### Introducción
+
+> ChatGPT Plus es una de las herramientas de IA del catálogo de Kuentra. Está pensado para estudiar, trabajar y crear, con acompañamiento de Kuentra.
+
+Este texto deriva de las dos descripciones actuales. **[REQUIERE CONFIRMACIÓN]** agregar una explicación más detallada de qué ofrece Kuentra para este servicio sin describir funcionalidades de terceros no aprobadas.
+
+#### Qué incluye
+
+- Modalidad `Compartido` por `1 mes`.
+- Modalidad `Individual` por `1 mes`.
+- Acompañamiento de Kuentra, según la descripción del catálogo.
+- **[REQUIERE CONFIRMACIÓN]** Diferencias entre ambas modalidades.
+- **[REQUIERE CONFIRMACIÓN]** Forma de activación, acceso, alcance del acompañamiento y cualquier condición de cada alternativa.
+
+No incluir precios, cantidad de usuarios, características del producto, privacidad, límites ni beneficios adicionales hasta que estén aprobados.
+
+#### Cómo funciona
+
+Usar únicamente el proceso general ya publicado, precedido por una aclaración: “Este es el proceso general de Kuentra; la aplicación exacta a ChatGPT Plus se confirma antes de avanzar.”
+
+1. Elegís el servicio.
+2. Coordinás el pago; Kuentra confirma el plan, el valor y cada detalle antes de avanzar.
+3. Recibís el acceso; Kuentra guía durante la activación y continúa disponible si necesitás ayuda.
+
+**[REQUIERE CONFIRMACIÓN]** Validar que los tres pasos, las instrucciones por WhatsApp y el soporte posterior aplican sin excepciones a ChatGPT Plus antes de presentarlos como proceso específico de la ficha.
+
+#### Para quién puede servir
+
+> Puede servir a personas que buscan una herramienta de IA para estudiar, trabajar y crear.
+
+La frase refleja el uso declarado en la tarjeta. **[REQUIERE CONFIRMACIÓN]** cualquier perfil más concreto, resultado, caso de uso, sector o beneficio; no se deben añadir ejemplos que no estén documentados.
+
+#### Preguntas frecuentes
+
+Las siguientes preguntas se pueden planificar, pero no deben publicarse como FAQ específica hasta validar sus respuestas:
+
+| Pregunta | Respuesta disponible | Estado |
+| --- | --- | --- |
+| ¿Qué modalidades de ChatGPT Plus ofrece Kuentra? | Compartido e Individual; ambas figuran con una duración de 1 mes. | Confirmado en el catálogo; confirmar vigencia al publicar. |
+| ¿Cómo se coordina la activación? | La FAQ general indica coordinación por WhatsApp e instrucciones de activación después de coordinar el pago. | **[REQUIERE CONFIRMACIÓN]** para ChatGPT Plus. |
+| ¿Cuánto demora la activación? | La home dice que la mayoría de los servicios se activa en el día y que el tiempo exacto depende del producto, informado antes de confirmar. | **[REQUIERE CONFIRMACIÓN]** para ChatGPT Plus; no prometer un plazo. |
+| ¿Hay soporte después de la activación? | La FAQ general indica soporte durante la vigencia del servicio ante inconvenientes. | **[REQUIERE CONFIRMACIÓN]** de alcance específico para ChatGPT Plus. |
+| ¿Cuál es la diferencia entre Compartido e Individual? | No hay explicación en el proyecto. | **[REQUIERE CONFIRMACIÓN]**. |
+
+No utilizar `FAQPage` como datos estructurados mientras las respuestas sean genéricas o estén pendientes de confirmación.
+
+#### CTA final
+
+- **Etiqueta confirmada que puede reutilizarse:** `Hablar por WhatsApp`.
+- **Texto de apoyo tentativo:** `Coordiná el plan, el valor y los detalles antes de avanzar.`
+- **[REQUIERE CONFIRMACIÓN]** enlace de WhatsApp operativo, contexto específico de la consulta y cualquier mensaje precompletado sobre ChatGPT Plus.
+
+### SEO técnico y enlazado para una futura publicación
+
+- **Canonical esperada:** `https://kuentra.com.ar/servicios/chatgpt-plus`, autorreferente y única. Solo debe declararse cuando la ruta exista y sea indexable.
+- **Breadcrumb futuro:** no añadirlo por ahora. Si posteriormente existe una landing real `/servicios/`, usar `Inicio > Servicios > ChatGPT Plus`; sin esa landing, omitir breadcrumbs en lugar de simular una jerarquía.
+- **Enlaces internos:** al publicar, la tarjeta de ChatGPT Plus de la home debería enlazar a la ficha y la ficha debe enlazar de vuelta al catálogo de la home. Mantener el resumen breve en la tarjeta y desarrollar contenido original en la ficha para evitar canibalización. No realizar este cambio todavía.
+- **Sitemap:** añadir `https://kuentra.com.ar/servicios/chatgpt-plus` solamente en la misma etapa en que la página esté publicada, tenga contenido aprobado y sea indexable. No incluir la ruta propuesta antes ni usar una fecha de modificación artificial.
+- **Schema.org posterior:** se podría evaluar `WebPage`, enlazada al `WebSite` y `Organization` ya declarados. Evaluar `BreadcrumbList` únicamente si los breadcrumbs existen de verdad. No usar `Product`, `Offer`, `Review`, `AggregateRating` ni `FAQPage` sin datos específicos y verificados.
+
+### Criterio de salida de la especificación
+
+La ficha piloto queda lista para implementación solo cuando se confirmen las modalidades, condiciones, duración, precio/forma de mostrarlo, flujo de activación, soporte y CTA operativo; se apruebe contenido original suficiente; y se validen metadata, canonical, enlazado interno y sitemap en la misma etapa. Hasta entonces, ChatGPT Plus debe permanecer como tarjeta dentro de la home.
+
+## 11. Auditoría Lighthouse: accesibilidad y prácticas recomendadas
+
+**Estado:** auditoría realizada el 2026-08-30; no se modificó código, diseño ni configuración. Se ejecutó Lighthouse móvil sobre `https://kuentra.com.ar/`, limitado a Accessibility y Best Practices: `Accessibility 92` y `Best Practices 96`, en línea con la medición de referencia. El análisis se limita a ARIA prohibida, contraste y errores de consola; no cubre rendimiento, LCP, JavaScript ni animaciones.
+
+### 11.1 Elementos con atributos ARIA prohibidos
+
+| Componente / archivo | Elemento afectado | Causa | Impacto real | Corrección recomendada | ¿Altera el diseño? | Prioridad |
+| --- | --- | --- | --- | --- | --- | --- |
+| `frontend/web/components/reviews-experience.tsx` | Las tres instancias de `<span class="flex gap-0.5" aria-label="Calificación de 5 estrellas">` que agrupan las estrellas de las tarjetas de opiniones. | Un `span` sin rol semántico válido no permite `aria-label`; Lighthouse informa literalmente: “aria-label attribute cannot be used on a span with no valid role attribute”. | Las estrellas se ven, pero su calificación no queda expuesta de forma válida a tecnologías asistivas y la auditoría de accesibilidad falla. No afecta el flujo de compra ni la indexación. | Convertir el agrupador en un elemento con semántica válida para ese nombre, por ejemplo `role="img"` con el `aria-label` existente, o exponer un texto solo para lectores de pantalla y marcar los SVG como decorativos. Elegir una única alternativa y comprobar la lectura con lector de pantalla. | No; el cambio de rol o texto oculto no modifica la apariencia. | Media |
+
+El formulario de opiniones contiene otros `aria-label`, pero no estaba abierto en la carga evaluada y no es la causa de este resultado de Lighthouse. Su revisión debe tratarse en una etapa de accesibilidad separada.
+
+### 11.2 Contraste insuficiente
+
+Lighthouse detectó 51 nodos. Las causas se concentran en opacidades bajas para texto secundario y en el uso de blanco sobre el azul de marca `#4c9ddb`, que no alcanza el contraste exigido. No se trata de un único selector global.
+
+| Componentes / archivos | Elementos afectados y evidencia | Causa | Impacto real | Corrección recomendada | ¿Altera el diseño? | Prioridad |
+| --- | --- | --- | --- | --- | --- | --- |
+| `frontend/web/components/product-card.tsx` | 38 nodos en las seis tarjetas: `Precio oficial`, `Actualizando...`, `Kuentra desde`, duración, modalidad, referencia de precio y tarifa. Las clases implicadas son `!text-current/50`, `opacity-45` y `opacity-60`, combinadas con fondos claros o con el fondo azul de la tarjeta destacada. Lighthouse registra relaciones entre `2.77:1` y `4.31:1`; por ejemplo, `Actualizando...` en la tarjeta destacada tiene `3.39:1`. | Las opacidades reducen demasiado el contraste del texto heredado y el azul de marca sobre fondos claros tampoco alcanza 4.5:1 en texto pequeño. | Información de precio, duración y modalidad pierde legibilidad, especialmente en móvil. Afecta a todo el catálogo visible y es el bloque más numeroso de fallos. | Definir colores de texto secundarios accesibles para los dos contextos de tarjeta (clara y destacada), en vez de reducir la opacidad hasta incumplir. Validar por separado el texto normal de 8–14 px y las etiquetas. | Sí, de forma acotada: el texto secundario se verá más contrastado y/o los fondos de sus paneles deberán ajustarse levemente. | Alta |
+| `frontend/web/components/sections.tsx` y `frontend/web/components/reviews-experience.tsx` | 10 nodos: `Opiniones / Comunidad`, los tres rótulos `KUENTRA / 01–03`, `Preguntas frecuentes` y los números `01–05` de la FAQ. Usan `text-brand` sobre blanco o `canvas`; Lighthouse mide `2.93:1` y `2.78:1`. | El token `--brand: #4c9ddb` es demasiado claro para tipografía pequeña sobre fondos claros. | Son rótulos auxiliares, pero la lectura en condiciones de baja visión no alcanza el mínimo y la auditoría falla. | Usar un tono de texto de marca más oscuro para etiquetas sobre superficies claras, manteniendo `--brand` para elementos decorativos si se desea. Verificar la nueva relación en blanco y `canvas`. | Sí, leve: los rótulos azules se oscurecerán. | Media |
+| `frontend/web/components/sections.tsx` | CTA final: rótulo `Tu próximo servicio digital` (`2.19:1`), H2 `Todo listo para dar el próximo paso` (`2.93:1`, aunque es texto grande requiere 3:1) y enlace `Hablar por WhatsApp` (`2.93:1`) sobre `bg-brand`. | Blanco y blanco al 70 % sobre `#4c9ddb` no alcanzan el contraste requerido. | Afecta el CTA principal de la home y su enlace de contacto; es visualmente relevante y perjudica la lectura. | Oscurecer el fondo del CTA hasta cumplir con texto blanco, o usar una combinación de texto y fondo alternativa que cumpla. Conservar estados de hover y foco con el mismo criterio. | Sí: el panel final cambiará perceptiblemente de tono o de color de texto. | Alta |
+
+No se recomienda resolver estos fallos con opacidad, filtros o sombras únicamente: la combinación final de color y fondo debe superar el umbral de Lighthouse. La corrección debe probarse en móvil y no debe modificar contenido, URLs, metadata, sitemap ni robots.
+
+### 11.3 Errores registrados en la consola
+
+Lighthouse registró exactamente estos dos mensajes, originados por una única solicitud:
+
+```text
+Access to fetch at 'https://api-production-8b2ae.up.railway.app/reviews' from origin 'https://kuentra.com.ar' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Failed to load resource: net::ERR_FAILED
+```
+
+| Componente / archivo | Elemento o solicitud afectada | Causa | Impacto real | Corrección recomendada | ¿Altera el diseño? | Prioridad |
+| --- | --- | --- | --- | --- | --- | --- |
+| `frontend/web/components/reviews-experience.tsx` | `useEffect` ejecuta `fetch(`${NEXT_PUBLIC_KUENTRA_API_URL}/reviews`)` al cargar la home. El bundle publicado resuelve la URL a `https://api-production-8b2ae.up.railway.app/reviews`. | La API de Railway devuelve 200 para la solicitud, pero no envía `Access-Control-Allow-Origin` cuando el origen es `https://kuentra.com.ar`. El backend usa una lista de orígenes desde `CORS_ORIGIN` en `backend/api/src/main.ts`; la configuración desplegada no permite el dominio de producción. | La carga de opiniones reales falla en navegador. El componente captura el error y muestra testimonios de muestra, por lo que la home no se cae; sin embargo, no puede mostrar opiniones remotas. El mismo origen/configuración también bloquearía el POST del formulario de opiniones. Es la causa de la penalización de Best Practices. | Configurar en el entorno de producción de la API `CORS_ORIGIN=https://kuentra.com.ar` (más cualquier otro origen explícitamente autorizado que corresponda), redesplegar la API y verificar con una solicitud que incluya `Origin: https://kuentra.com.ar` y reciba el header permitido. No añadir middleware ni desactivar CORS en el frontend. | No; es una corrección de configuración de la API. | Alta |
+
+El error proviene de una interacción de código propio con la API propia de Kuentra desplegada en Railway: el disparador es el componente cliente y la causa raíz es la configuración externa del backend. No proviene de Cloudflare, una extensión del navegador, Lighthouse ni un recurso de terceros. No apareció en esta ejecución un error de favicon ni otro error de consola independiente.
+
+### Orden recomendado para una futura etapa de corrección
+
+1. Corregir la configuración CORS de la API y comprobar que desaparecen ambos mensajes de consola sin alterar la experiencia visual.
+2. Corregir el grupo ARIA de las calificaciones y validar con Lighthouse y lector de pantalla.
+3. Definir y validar las combinaciones de color del CTA final y de las tarjetas antes de cambiar estilos; aplicar los cambios de contraste en una etapa visual controlada.
+4. Reejecutar Lighthouse móvil para confirmar que Accessibility y Best Practices mejoran, sin abrir una tarea de rendimiento.
