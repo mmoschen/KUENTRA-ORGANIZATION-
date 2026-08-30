@@ -65,6 +65,11 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .hero-console > div:nth-child(5) { animation: float 6.2s .6s ease-in-out infinite; }
 .hero-console > div:nth-child(6) { animation: float 5.4s .4s ease-in-out infinite reverse; }
 .hero-orbit-deep { min-width: 120px !important; padding: .7rem !important; opacity: .46; filter: saturate(.78); animation: float-deep 7.2s ease-in-out infinite; }
+.orbit-cursor-trail { position: absolute; inset: 0; z-index: 20; cursor: none; }
+.orbit-cursor-dot { position: absolute; left: -4px; top: -4px; display: block; border-radius: 999px; pointer-events: none; opacity: 0; transition: opacity 220ms ease; background: rgba(104, 205, 255, .85); box-shadow: 0 0 12px rgba(104, 205, 255, .6); }
+.orbit-cursor-dot-1 { width: 18px; height: 18px; background: url("/kuentra-mark.svg") center / contain no-repeat; box-shadow: 0 3px 12px rgba(104, 205, 255, .45); }
+.orbit-cursor-dot-2 { width: 6px; height: 6px; }
+.orbit-cursor-dot-3 { width: 5px; height: 5px; }
 
 .whatsapp-button { animation: whatsapp-pulse 7s ease-out infinite; }
 .whatsapp-icon { animation: whatsapp-spin 7s cubic-bezier(.2,.8,.2,1) infinite; }
@@ -106,6 +111,11 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
   .hero-console { transform: scale(.96); }
 }
 
+@media (pointer: coarse) {
+  .orbit-cursor-trail { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .orbit-cursor-trail { display: none; }
 }

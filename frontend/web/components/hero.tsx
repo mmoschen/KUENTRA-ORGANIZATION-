@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, BadgeCheck, MessageCircle } from "lucide-react";
 import { BrandMark } from "./brand";
+import { OrbitCursorTrail } from "./orbit-cursor-trail";
 
 export function Hero() {
   return (
@@ -59,6 +60,7 @@ export function Hero() {
               Argentina
             </span>
           </div>
+          <OrbitCursorTrail />
         </div>
       </div>
       <a href="#productos" aria-label="Bajar a productos" className="absolute bottom-6 left-1/2 z-20 grid size-10 -translate-x-1/2 place-items-center rounded-full border border-ink/15 text-ink/60 transition-colors hover:border-brand hover:text-brand">

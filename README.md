@@ -22,4 +22,8 @@ Para ver los precios oficiales estimados actualizados, iniciar también la API e
 npm run dev --workspace=@kuentra/api
 ```
 
+## Despliegue
+
+La guía completa para Railway, con PostgreSQL, variables, health checks, migraciones y volumen privado de capturas está en [`docs/railway-deploy.md`](docs/railway-deploy.md).
+
 Los precios Kuentra siguen centralizados como datos comerciales. La referencia oficial se calcula con el tipo de cambio vendedor del BCRA y la percepción vigente para servicios del exterior. Checkout, autenticación, pagos, pedidos y base de datos quedan fuera de alcance.

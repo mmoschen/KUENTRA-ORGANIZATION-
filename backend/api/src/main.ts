@@ -57,8 +57,16 @@ class PricingController {
   }
 }
 
+@Controller()
+class HealthController {
+  @Get("health")
+  getHealth() {
+    return { status: "ok" };
+  }
+}
+
 @Module({
-  controllers: [PricingController, ReviewsController],
+  controllers: [HealthController, PricingController, ReviewsController],
   providers: [
     DatabaseService,
     ReviewsService,
