@@ -56,7 +56,7 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
-| OK | `frontend/web/app/layout.tsx`, `frontend/web/public/kuentra-social.png` | La home declara una imagen social PNG propia de 1200×630: `og:image`, `og:image:alt`, `og:image:width`, `og:image:height`, `twitter:image` y `twitter:image:alt`. El asset se optimizó sin alterar su contenido visual y redujo su peso de 1,31 MB a 954 KB. Con `metadataBase`, Next.js resuelve la URL absoluta `https://kuentra.com.ar/kuentra-social.png`. La tarjeta conserva `summary_large_image`. | Mantener este único asset para la home y validar su vista previa luego de cada cambio visual relevante. |
+| OK | `frontend/web/app/layout.tsx`, `frontend/web/public/kuentra-social.jpg` | La home declara una imagen social JPEG propia de 1200×630: `og:image`, `og:image:alt`, `og:image:width`, `og:image:height`, `twitter:image` y `twitter:image:alt`. El asset conserva su diseño visual y redujo su peso de 954 KB a 77 KB. Con `metadataBase`, Next.js resuelve la URL absoluta `https://kuentra.com.ar/kuentra-social.jpg`. La tarjeta conserva `summary_large_image`. | Mantener este único asset para la home y validar su vista previa luego de cada cambio visual relevante. |
 
 ### Schema.org / datos estructurados
 
@@ -147,6 +147,7 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 | 2026-08-30 | Reemplazo del contenido de la imagen social por el asset visual aprobado de Restate, sin cambiar su URL pública. | `docs/design-reference/restate/Imagensocial.png`, `frontend/web/public/kuentra-social.png`, `frontend/web/app/layout.tsx`, `docs/SEO.md` | Usar la variante visual seleccionada para las vistas previas sociales. | Completado |
 | 2026-08-30 | Optimización del PNG social existente a 1200×630, conservando contenido y proporción visual. | `frontend/web/public/kuentra-social.png`, `frontend/web/app/layout.tsx`, `docs/SEO.md` | Reducir el peso de la imagen para social sharing sin cambiar su URL ni su contenido visual. | Completado |
 | 2026-08-30 | Verificación de locale de Open Graph. La configuración ya era `es_AR`; no requirió cambio de metadata. | `frontend/web/app/layout.tsx`, `docs/SEO.md` | Confirmar español de Argentina en la metadata social sin introducir una modificación redundante. | Completado |
+| 2026-08-30 | Conversión de la imagen social de PNG a JPEG de alta calidad (92), conservando diseño y dimensiones 1200×630. | `frontend/web/public/kuentra-social.jpg`, `frontend/web/public/kuentra-social.png` (eliminado), `frontend/web/app/layout.tsx`, `docs/SEO.md` | Reducir el peso para social sharing de 954 KB a 77 KB (−91,9 %) sin alterar el diseño visual. | Completado |
 
 ## 7. Backlog SEO
 

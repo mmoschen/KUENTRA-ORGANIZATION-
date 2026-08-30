@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     siteName: "Kuentra",
     locale: "es_AR",
     type: "website",
-    images: [{ url: "/kuentra-social.png", width: 1200, height: 630, alt: "Kuentra, servicios digitales más simples" }],
+    images: [{ url: "/kuentra-social.jpg", width: 1200, height: 630, alt: "Kuentra, servicios digitales más simples" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kuentra | Servicios digitales",
     description: "Todo lo que usás. En un solo lugar.",
-    images: [{ url: "/kuentra-social.png", alt: "Kuentra, servicios digitales más simples" }],
+    images: [{ url: "/kuentra-social.jpg", alt: "Kuentra, servicios digitales más simples" }],
   },
 };
 
