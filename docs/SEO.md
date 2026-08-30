@@ -62,7 +62,14 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
-| Falta | No hay implementación | No se encontró JSON-LD ni microdatos Schema.org. | Planificar una etapa posterior con datos verificables: como mínimo `Organization` y `WebSite`; evaluar `Product` únicamente cuando existan páginas de producto con información completa y política comercial aprobada. No agregar Schema ficticio ni de reseñas no verificadas. |
+| OK | `frontend/web/app/page.tsx` | La home publica JSON-LD en el HTML inicial con `Organization` y `WebSite`, relacionados mediante `@id`. | Mantener el marcado limitado a datos verificados y revisarlo ante cualquier cambio institucional o de dominio. |
+
+Propiedades implementadas:
+
+- `Organization`: `@id`, `name`, `url` y `logo` (`https://kuentra.com.ar/kuentra-mark.png`).
+- `WebSite`: `@id`, `name`, `url`, `inLanguage` (`es`) y `publisher` que referencia a la organización mediante `@id`.
+
+Propiedades omitidas por no estar confirmadas: razón social, CUIT, dirección, teléfono, email, founder, fecha de fundación, empleados, redes sociales / `sameAs`, `contactPoint`, reviews, `aggregateRating`, `Product`, `Offer` y precios.
 
 ### Headings y jerarquía de contenido
 
@@ -81,6 +88,7 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
 | OK / Mejorable | `frontend/web/components/brand.tsx`, `sections.tsx`, `frontend/web/public/*` | El logo decorativo usa `alt=""` de forma correcta; la mascota usa `alt="Mascota de Kuentra"`. `next/image` se usa para ambas. | Mantener alt vacío solo en imágenes decorativas y alt descriptivo en imágenes informativas. |
+| Resuelto | `frontend/web/components/brand.tsx`, `hero.tsx`, `footer.tsx` | Seobility reportó tres imágenes sin alt. Se verificó la home publicada: ninguna etiqueta `<img>` carece de atributo `alt`. Las tres instancias de `kuentra-mark.svg` usan `alt=""` intencionalmente porque son decorativas y acompañan texto o etiquetas accesibles. | No agregar texto alternativo: sería redundante y empeoraría la experiencia con lectores de pantalla. |
 | Mejorable | `frontend/web/app/layout.tsx`, `frontend/web/public/kuentra-mark.png`, `frontend/web/public/kuentra-mark.svg` | Se declara un PNG como favicon y apple-touch-icon. No existe `/favicon.ico` (respuesta 404). El PNG mide 1254×1254 y pesa ~250 KB, mientras que ya existe un SVG de marca. | En una etapa posterior generar iconos adecuados por tamaño/formato y un `favicon.ico` o la convención nativa de Next; no reemplazar activos sin validar el resultado visual. |
 | Revisar | `frontend/web/public/mascota.png`, `components/sections.tsx` | La fuente de la mascota pesa ~832 KB (1974×797), aunque se muestra mucho más pequeña. `next/image` puede optimizar su entrega; no se realizó una medición de bytes transferidos en navegador. | Auditar el recurso final servido y optimizar dimensiones/formato si aparece como oportunidad en Lighthouse/PageSpeed. |
 
@@ -148,6 +156,8 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 | 2026-08-30 | Optimización del PNG social existente a 1200×630, conservando contenido y proporción visual. | `frontend/web/public/kuentra-social.png`, `frontend/web/app/layout.tsx`, `docs/SEO.md` | Reducir el peso de la imagen para social sharing sin cambiar su URL ni su contenido visual. | Completado |
 | 2026-08-30 | Verificación de locale de Open Graph. La configuración ya era `es_AR`; no requirió cambio de metadata. | `frontend/web/app/layout.tsx`, `docs/SEO.md` | Confirmar español de Argentina en la metadata social sin introducir una modificación redundante. | Completado |
 | 2026-08-30 | Conversión de la imagen social de PNG a JPEG de alta calidad (92), conservando diseño y dimensiones 1200×630. | `frontend/web/public/kuentra-social.jpg`, `frontend/web/public/kuentra-social.png` (eliminado), `frontend/web/app/layout.tsx`, `docs/SEO.md` | Reducir el peso para social sharing de 954 KB a 77 KB (−91,9 %) sin alterar el diseño visual. | Completado |
+| 2026-08-30 | Revisión de las tres advertencias de Image SEO de Seobility. | `docs/SEO.md` | Confirmar que las tres marcas decorativas tienen `alt=""` intencional y que no hay etiquetas `<img>` sin atributo alt en la home publicada. | Resuelto, sin cambios de código |
+| 2026-08-30 | Implementación de JSON-LD para `Organization` y `WebSite` en la home. | `frontend/web/app/page.tsx`, `docs/SEO.md` | Aportar datos estructurados verificables sin añadir información comercial, de contacto o reputación no confirmada. | Completado |
 
 ## 7. Backlog SEO
 
@@ -159,7 +169,6 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 
 - Definir la estrategia de `www.kuentra.com.ar`: redirección 301 al dominio canónico si se habilita, o confirmación documentada de que no se usará.
 - Definir arquitectura y contenido aprobados para páginas públicas de productos; cada una debe nacer con metadata, canonical, sitemap y contenido propio. No crear páginas automáticamente solo a partir de la ficha actual.
-- Añadir Schema.org mínimo y verificable (`Organization` y `WebSite`) tras validar los datos de la organización.
 - Registrar una línea base de rendimiento móvil/escritorio en PageSpeed Insights y datos de campo en Search Console/CrUX cuando estén disponibles.
 
 ### P2 — mejora
