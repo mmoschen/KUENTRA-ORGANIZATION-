@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "Kuentra",
     locale: "es_AR",
     type: "website",
-    images: [{ url: "/kuentra-social.png", width: 1731, height: 909, alt: "Kuentra, servicios digitales más simples" }],
+    images: [{ url: "/kuentra-social.png", width: 1200, height: 630, alt: "Kuentra, servicios digitales más simples" }],
   },
   twitter: {
     card: "summary_large_image",
