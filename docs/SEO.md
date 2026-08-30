@@ -158,6 +158,7 @@ Propiedades omitidas por no estar confirmadas: razón social, CUIT, dirección, 
 | 2026-08-30 | Conversión de la imagen social de PNG a JPEG de alta calidad (92), conservando diseño y dimensiones 1200×630. | `frontend/web/public/kuentra-social.jpg`, `frontend/web/public/kuentra-social.png` (eliminado), `frontend/web/app/layout.tsx`, `docs/SEO.md` | Reducir el peso para social sharing de 954 KB a 77 KB (−91,9 %) sin alterar el diseño visual. | Completado |
 | 2026-08-30 | Revisión de las tres advertencias de Image SEO de Seobility. | `docs/SEO.md` | Confirmar que las tres marcas decorativas tienen `alt=""` intencional y que no hay etiquetas `<img>` sin atributo alt en la home publicada. | Resuelto, sin cambios de código |
 | 2026-08-30 | Implementación de JSON-LD para `Organization` y `WebSite` en la home. | `frontend/web/app/page.tsx`, `docs/SEO.md` | Aportar datos estructurados verificables sin añadir información comercial, de contacto o reputación no confirmada. | Completado |
+| 2026-08-30 | Deshabilitación del header `X-Powered-By` mediante `poweredByHeader: false`. | `frontend/web/next.config.ts`, `docs/SEO.md` | Reducir la exposición de tecnología en las respuestas HTTP sin modificar metadata, Schema, sitemap, robots, URLs, contenido ni diseño. | Completado |
 
 ## 7. Backlog SEO
 
