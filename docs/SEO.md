@@ -159,6 +159,7 @@ Propiedades omitidas por no estar confirmadas: razón social, CUIT, dirección, 
 | 2026-08-30 | Revisión de las tres advertencias de Image SEO de Seobility. | `docs/SEO.md` | Confirmar que las tres marcas decorativas tienen `alt=""` intencional y que no hay etiquetas `<img>` sin atributo alt en la home publicada. | Resuelto, sin cambios de código |
 | 2026-08-30 | Implementación de JSON-LD para `Organization` y `WebSite` en la home. | `frontend/web/app/page.tsx`, `docs/SEO.md` | Aportar datos estructurados verificables sin añadir información comercial, de contacto o reputación no confirmada. | Completado |
 | 2026-08-30 | Deshabilitación del header `X-Powered-By` mediante `poweredByHeader: false`. | `frontend/web/next.config.ts`, `docs/SEO.md` | Reducir la exposición de tecnología en las respuestas HTTP sin modificar metadata, Schema, sitemap, robots, URLs, contenido ni diseño. | Completado |
+| 2026-08-30 | Corrección de ARIA en las calificaciones de testimonios. | `frontend/web/components/reviews-experience.tsx`, `docs/SEO.md` | Asociar la etiqueta de calificación a un rol semántico válido sin modificar la apariencia de las estrellas. | Completado |
 
 ## 7. Backlog SEO
 
@@ -371,6 +372,8 @@ La ficha piloto queda lista para implementación solo cuando se confirmen las mo
 | `frontend/web/components/reviews-experience.tsx` | Las tres instancias de `<span class="flex gap-0.5" aria-label="Calificación de 5 estrellas">` que agrupan las estrellas de las tarjetas de opiniones. | Un `span` sin rol semántico válido no permite `aria-label`; Lighthouse informa literalmente: “aria-label attribute cannot be used on a span with no valid role attribute”. | Las estrellas se ven, pero su calificación no queda expuesta de forma válida a tecnologías asistivas y la auditoría de accesibilidad falla. No afecta el flujo de compra ni la indexación. | Convertir el agrupador en un elemento con semántica válida para ese nombre, por ejemplo `role="img"` con el `aria-label` existente, o exponer un texto solo para lectores de pantalla y marcar los SVG como decorativos. Elegir una única alternativa y comprobar la lectura con lector de pantalla. | No; el cambio de rol o texto oculto no modifica la apariencia. | Media |
 
 El formulario de opiniones contiene otros `aria-label`, pero no estaba abierto en la carga evaluada y no es la causa de este resultado de Lighthouse. Su revisión debe tratarse en una etapa de accesibilidad separada.
+
+**Corrección aplicada el 2026-08-30:** las tres calificaciones renderizadas por `reviews-experience.tsx` ahora usan `role="img"` junto con su `aria-label`. El texto accesible se conserva y los SVG de estrellas mantienen su representación visual. Esta corrección no modifica los hallazgos de contraste ni de consola, que permanecen pendientes de sus etapas específicas.
 
 ### 11.2 Contraste insuficiente
 

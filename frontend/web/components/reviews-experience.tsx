@@ -33,7 +33,7 @@ export function ReviewsExperience({ fallback }: { fallback: FallbackReview[] }) 
             <div>
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] tracking-[0.16em] text-brand">KUENTRA / {String(index + 1).padStart(2, "0")}</span>
-                <span className="flex gap-0.5" aria-label={`Calificación de ${testimonial.rating} estrellas`}>
+                <span className="flex gap-0.5" role="img" aria-label={`Calificación de ${testimonial.rating} estrellas`}>
                   {Array.from({ length: 5 }, (_, star) => <Star key={star} className={`size-3.5 ${star < testimonial.rating ? "fill-brand text-brand" : "text-line"}`} strokeWidth={1.5} />)}
                 </span>
               </div>
