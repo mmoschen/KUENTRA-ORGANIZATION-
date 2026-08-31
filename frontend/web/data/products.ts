@@ -56,7 +56,7 @@ export const products: Product[] = [
     planOptions: ["1 mes", "3 meses"],
     shortDescription: "Diseñá piezas claras, rápidas y listas para publicar.",
     description: "Plantillas, recursos premium y herramientas de marca para todos tus proyectos.",
-    plans: [{ id: "canva-monthly", name: "Individual", duration: "1 mes", price: 14900 }],
+    plans: [{ id: "canva-monthly", name: "Individual", duration: "1 mes", price: 6500 }],
   },
   {
     id: "perplexity-pro",
