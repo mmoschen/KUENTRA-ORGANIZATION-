@@ -106,6 +106,8 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 767px) {
   .section-space { padding-block: 6.5rem; }
+  .section-heading-row { gap: 1.75rem; text-align: center; }
+  .section-title, .section-intro { margin-inline: auto; }
   .product-grid { grid-template-columns: 1fr; }
   .product-card, .product-card--prominent { grid-column: auto; min-height: 410px; }
   .hero-console { transform: scale(.96); }

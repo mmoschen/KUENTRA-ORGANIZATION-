@@ -35,7 +35,7 @@ export function SiteHeader() {
           </summary>
           <nav className="absolute right-0 top-12 flex w-[min(82vw,320px)] flex-col rounded-xl border border-white/10 bg-ink p-2 shadow-2xl">
             {nav.map(([label, href]) => (
-              <a key={href} href={href} className="rounded-lg px-4 py-3 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">
+              <a key={href} href={href} className="rounded-lg px-4 py-3 text-center text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white">
                 {label}
               </a>
             ))}

@@ -6,23 +6,23 @@ export function Hero() {
   return (
     <section className="hero-grid relative flex min-h-[900px] items-center overflow-hidden bg-ice pt-28 md:min-h-[920px]">
       <div className="site-container relative z-10 grid items-center gap-14 py-20 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-white/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-brand-dark backdrop-blur">
+        <div className="text-center lg:text-left">
+          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-brand/20 bg-white/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-brand-dark backdrop-blur lg:mx-0">
             <span className="size-1.5 rounded-full bg-brand shadow-[0_0_0_4px_rgba(76,157,219,0.12)]" />
             Servicios digitales / Argentina
           </div>
-          <h1 className="mt-9 max-w-[760px] font-display text-[clamp(3.5rem,5.2vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.078em] text-ink">
+          <h1 className="mx-auto mt-9 max-w-[760px] font-display text-[clamp(3.5rem,5.2vw,6.25rem)] font-medium leading-[0.92] tracking-[-0.078em] text-ink lg:mx-0">
             <span className="block">Tus servicios</span>
             <span className="block">digitales.</span>
             <span className="block text-brand">Más simples.</span>
             <span className="block">Más accesibles.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-[17px] leading-7 text-muted md:text-xl md:leading-8">Accedé a herramientas como ChatGPT, Gemini, CapCut y más desde un solo lugar.</p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <p className="mx-auto mt-8 max-w-xl text-[17px] leading-7 text-muted md:text-xl md:leading-8 lg:mx-0">Accedé a herramientas como ChatGPT, Gemini, CapCut y más desde un solo lugar.</p>
+          <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
             <a href="#productos" className="button button-primary">Ver productos <ArrowRight className="size-4" /></a>
             <a href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta." target="_blank" rel="noreferrer" className="button button-secondary"><MessageCircle className="size-4" /> Hablar por WhatsApp</a>
           </div>
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-ink/10 pt-5">
+          <div className="mt-14 flex flex-wrap justify-center gap-x-8 gap-y-3 border-t border-ink/10 pt-5 lg:justify-start">
             <span className="eyebrow flex items-center gap-2 text-muted"><BadgeCheck className="size-3.5 text-brand" /> Activación rápida</span>
             <span className="eyebrow flex items-center gap-2 text-muted"><BadgeCheck className="size-3.5 text-brand" /> Soporte real</span>
           </div>

@@ -5,7 +5,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noreferrer"
       aria-label="Hablar por WhatsApp"
-      className="whatsapp-button group fixed bottom-10 right-10 z-50 grid size-16 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_14px_32px_rgba(37,211,102,0.38)] transition-transform duration-200 hover:-translate-y-1 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-12 sm:right-12"
+      className="whatsapp-button group fixed bottom-4 right-3 z-50 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_14px_32px_rgba(37,211,102,0.38)] transition-transform duration-200 hover:-translate-y-1 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-12 sm:right-12 sm:size-16"
     >
       <span aria-hidden="true" className="whatsapp-trail absolute -inset-2 rounded-full border border-[#25D366]/60" />
       <svg viewBox="0 0 448 512" aria-hidden="true" className="whatsapp-icon relative size-8 fill-current">
