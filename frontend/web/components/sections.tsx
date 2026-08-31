@@ -122,7 +122,7 @@ export function FinalCTA() {
           <h2 className="mt-8 max-w-5xl font-display text-[clamp(3.1rem,7.8vw,7.6rem)] font-medium leading-[0.86] tracking-[-0.075em]">Todo listo para<br />dar el próximo paso.</h2>
           <div className="mt-12 flex flex-wrap gap-3">
             <a href="#productos" className="button button-light">Ver productos <ArrowRight className="size-4" /></a>
-            <a href="https://wa.me/5491100000000" target="_blank" rel="noreferrer" className="button border border-white/25 text-white hover:bg-white/10"><MessageCircle className="size-4" /> Hablar por WhatsApp</a>
+            <a href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta." target="_blank" rel="noreferrer" className="button border border-white/25 text-white hover:bg-white/10"><MessageCircle className="size-4" /> Hablar por WhatsApp</a>
           </div>
         </div>
       </div>

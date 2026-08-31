@@ -20,7 +20,7 @@ export function Hero() {
           <p className="mt-8 max-w-xl text-[17px] leading-7 text-muted md:text-xl md:leading-8">Accedé a herramientas como ChatGPT, Gemini, CapCut y más desde un solo lugar.</p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a href="#productos" className="button button-primary">Ver productos <ArrowRight className="size-4" /></a>
-            <a href="https://wa.me/5491100000000" target="_blank" rel="noreferrer" className="button button-secondary"><MessageCircle className="size-4" /> Hablar por WhatsApp</a>
+            <a href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta." target="_blank" rel="noreferrer" className="button button-secondary"><MessageCircle className="size-4" /> Hablar por WhatsApp</a>
           </div>
           <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-ink/10 pt-5">
             <span className="eyebrow flex items-center gap-2 text-muted"><BadgeCheck className="size-3.5 text-brand" /> Activación rápida</span>

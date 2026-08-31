@@ -408,3 +408,53 @@ El error proviene de una interacción de código propio con la API propia de Kue
 2. Corregir el grupo ARIA de las calificaciones y validar con Lighthouse y lector de pantalla.
 3. Definir y validar las combinaciones de color del CTA final y de las tarjetas antes de cambiar estilos; aplicar los cambios de contraste en una etapa visual controlada.
 4. Reejecutar Lighthouse móvil para confirmar que Accessibility y Best Practices mejoran, sin abrir una tarea de rendimiento.
+
+## 12. Propuesta mínima de corrección de contraste
+
+**Estado:** análisis realizado el 2026-08-30; no se modificó código, estilos, layout ni tokens. Esta propuesta cubre únicamente los nodos que Lighthouse señaló en la home. No cambia `--brand: #4c9ddb` de forma global: ese azul se conserva para superficies, elementos decorativos y contextos donde ya funciona.
+
+### Criterio de color propuesto
+
+| Uso local propuesto | Color | Motivo |
+| --- | --- | --- |
+| Texto secundario sobre paneles claros | `#647384` (`--muted`, existente) | Cumple aproximadamente `4.58:1`–`4.61:1` sobre los fondos claros de las tarjetas y evita crear un token nuevo. |
+| Texto de marca sobre fondos claros | `#2474ad` (posible token local `--brand-text`) | Mantiene el matiz azul de la marca sin modificar `--brand`; alcanza aproximadamente `4.74:1` sobre `#f4f9fd` y `4.78:1` sobre `#f9f9fa`. |
+| Texto secundario en panel destacado oscuro | Blanco al 60 % sobre `#194370`; blanco al 65 % sobre `#244c77` | Alcanza aproximadamente `4.76:1` y `4.77:1`, respectivamente. Son los mínimos locales necesarios; no requiere cambiar el fondo de la tarjeta destacada. |
+| Fondo del CTA final | `#2474ad` en lugar de `#4c9ddb` | Con texto blanco pleno alcanza aproximadamente `5.03:1`, conserva una identidad azul y afecta solo a ese panel. |
+
+Los ratios son estimaciones calculadas con los colores compuestos que Lighthouse reportó. La etapa de implementación debe volver a medir los estilos computados en móvil, incluidos hover y foco.
+
+### Cambios obligatorios para accesibilidad
+
+| Componente y elemento exacto | Color / fondo actual y ratio | Objetivo | Propuesta mínima | Ratio estimado nuevo | Impacto visual | Alternativa sin cambiar el color de marca principal |
+| --- | --- | --- | --- | --- | --- | --- |
+| `frontend/web/components/product-card.tsx`: panel de referencia de tarjetas no destacadas; `Precio oficial`, precio de referencia, detalle, fuente y `Actualizando...` (`!text-current/50`, `opacity-55`, `opacity-45`). | Texto compuesto entre `#747f8a` y `#8c959e` sobre `#f9f9fa`; Lighthouse midió `2.88:1`–`3.87:1`. | `4.5:1` para texto normal y pequeño. | Usar `#647384` para toda la información secundaria de este panel, sin tocar el precio principal ni el fondo. | `4.61:1` sobre `#f9f9fa`. | Leve: el texto secundario será más legible, sin cambiar tamaños ni estructura. | Es la alternativa recomendada: reutiliza `--muted` existente y no modifica `--brand`. |
+| `frontend/web/components/product-card.tsx`: panel `Kuentra desde` de tarjetas no destacadas; rótulo `Kuentra desde` y líneas de duración/modalidad. | Rótulo `#4c9ddb` sobre `#f4f9fd`: `2.77:1`; duración/modalidad compuestas `#6985a4`: `3.60:1`. | `4.5:1`. | Rótulo con `#2474ad`; duración y modalidad con `#647384`. Mantener el precio principal en `--ink`. | `4.74:1` y `4.58:1`, respectivamente. | Leve: el rótulo azul se oscurece moderadamente; el precio y la jerarquía no cambian. | `#0c3868` (`--brand-dark`) alcanza aproximadamente `11.12:1` sobre este fondo y no añade token, pero se percibe más navy; `#2474ad` preserva mejor el acento azul. |
+| `frontend/web/components/product-card.tsx`: paneles secundarios de la tarjeta destacada de ChatGPT Plus. En el panel de referencia: `Precio oficial` y `Actualizando...`; en el panel `Kuentra desde`: duración y modalidades. | Panel de referencia `#194370`: `Precio oficial` `3.79:1`, `Actualizando...` `3.39:1`. Panel derecho `#244c77`: duración/modalidad `4.31:1`. | `4.5:1`. | En el panel de referencia usar blanco al 60 %; en el panel derecho usar blanco al 65 %. Mantener `text-brand-light` del rótulo `Kuentra desde`, que no fue señalado. | `4.76:1` sobre `#194370` y `4.77:1` sobre `#244c77`. | Leve: los metadatos se ven algo más claros; no cambian los azules ni el fondo destacado. | Ajustar los fondos de los paneles en vez del texto es posible, pero altera dos superficies y resulta menos localizado. |
+| `frontend/web/components/sections.tsx`: `Opiniones / Comunidad`, `Preguntas frecuentes` y números `01–05` de FAQ; `frontend/web/components/reviews-experience.tsx`: rótulos `KUENTRA / 01–03`. | `text-brand` (`#4c9ddb`) sobre blanco: `2.93:1`; sobre `#f7f9fb`: `2.78:1`. | `4.5:1` para estos rótulos de 10 px. | Aplicar el color local de texto de marca `#2474ad` solo a estos rótulos. No sustituir globalmente `text-brand`. | `4.78:1` sobre blanco y `4.74:1` sobre `#f7f9fb`. | Leve: se oscurecen solo microetiquetas y numeración. | `--brand-dark` también cumple y no añade token, pero el contraste visual con el azul de marca sería más fuerte. Un token local es preferible para conservar la identidad. |
+| `frontend/web/components/sections.tsx`: CTA final, contenedor actual `bg-brand`, rótulo `Tu próximo servicio digital`, H2 y enlace `Hablar por WhatsApp`. | Fondo `#4c9ddb`; rótulo blanco al 70 %: `2.19:1`; H2 y enlace blancos: `2.93:1`. | `4.5:1` para rótulo y enlace; el H2 grande como mínimo exige `3:1`, pero se propone AA completo. | Cambiar únicamente el fondo del CTA a `#2474ad`; usar blanco pleno en el rótulo en vez de blanco al 70 %. El H2 y enlace pueden permanecer blancos. El hover actual `hover:bg-white/10` debe reemplazarse por un estado más oscuro que conserve contraste. | Texto blanco pleno sobre `#2474ad`: `5.03:1`. | Perceptible, limitado al CTA: el panel pasa a un azul más profundo; no se oscurece el resto del sitio. | Usar `--brand-dark` como fondo da `11.79:1` y no añade color, pero sería un cambio visual mayor. Mantener el fondo actual y usar texto navy no alcanza de forma consistente para el enlace y pierde la intención de CTA oscuro. |
+
+### Cambios recomendados, no obligatorios en esta etapa
+
+- En la futura implementación, nombrar los tres usos como tokens semánticos locales (por ejemplo, `brand-text`, `card-meta-light` y `card-meta-dark`) en lugar de repetir opacidades. Esto reduce regresiones, pero no requiere rediseñar la paleta.
+- Verificar el estado hover del enlace de WhatsApp del CTA: una superposición blanca al 10 % sobre el nuevo fondo puede volver a bajar el contraste; un hover azul más oscuro, por ejemplo `#1f6fa9`, mantiene texto blanco con aproximadamente `5.38:1`.
+- Reejecutar Lighthouse móvil después de aplicar únicamente estos cambios y comprobar contraste de foco de los enlaces modificados.
+
+### Elementos que deben quedar intactos
+
+- `--brand: #4c9ddb` como token de marca global, fondos decorativos, puntos y elementos que no fueron señalados. Cambiarlo globalmente oscurecería innecesariamente la web.
+- `text-brand-light` sobre `bg-ink` en el bloque “Cómo funciona”: la combinación aproximada es `10.44:1` y no presenta un problema.
+- Precios principales de las tarjetas, títulos, textos `--ink`, botones `button-primary` y `button-light`: no fueron señalados por Lighthouse y ya cumplen en su contexto.
+- El rótulo `Catálogo / Selección`, los iconos de estrellas y otros elementos no listados por Lighthouse en la ejecución de referencia. No se deben cambiar por asociación; se reevalúan solo si un nuevo reporte los señala.
+- Layout, tipografía, tamaños, jerarquía y contenido de los componentes auditados.
+
+### Falsos positivos y límites
+
+No hay falsos positivos entre los 51 nodos informados: todos son texto visible con ratio por debajo de WCAG AA según Lighthouse. El alcance debe limitarse a esos nodos. Los elementos no reportados no se consideran automáticamente defectuosos por compartir una clase de color; modificarlos ahora sería ampliar la tarea sin evidencia.
+
+### Orden mínimo de implementación futura
+
+1. Corregir los metadatos de las tarjetas con los colores secundarios propuestos, preservando fondos y precio principal.
+2. Aplicar `#2474ad` solo a los diez rótulos de marca señalados.
+3. Ajustar de forma aislada el fondo y estados del CTA final.
+4. Validar Lighthouse móvil, contraste de hover/foco y revisión visual antes de considerar resuelto el punto.

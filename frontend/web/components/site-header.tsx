@@ -22,7 +22,7 @@ export function SiteHeader() {
         </nav>
         <a
           className="hidden h-10 items-center gap-2 rounded-[9px] bg-white px-4 text-[13px] font-bold text-ink transition-transform hover:-translate-y-0.5 sm:inline-flex"
-          href="https://wa.me/5491100000000"
+          href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta."
           target="_blank"
           rel="noreferrer"
         >
@@ -39,7 +39,7 @@ export function SiteHeader() {
                 {label}
               </a>
             ))}
-            <a href="https://wa.me/5491100000000" className="mt-2 rounded-lg bg-brand px-4 py-3 text-center text-sm font-bold text-white">
+            <a href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta." className="mt-2 rounded-lg bg-brand px-4 py-3 text-center text-sm font-bold text-white">
               Hablar por WhatsApp
             </a>
           </nav>

@@ -19,8 +19,8 @@ export function Footer() {
           <div>
             <p className="eyebrow text-muted">Contacto</p>
             <div className="mt-5 grid gap-3 text-sm font-semibold text-ink">
-              <a className="flex items-center gap-2" href="https://wa.me/5491100000000"><MessageCircle className="size-4 text-brand" /> WhatsApp <ArrowUpRight className="size-3" /></a>
-              <a className="flex items-center gap-2" href="#"><Camera className="size-4 text-brand" /> Instagram <ArrowUpRight className="size-3" /></a>
+              <a className="flex items-center gap-2" href="https://wa.me/5493624203266?text=Hola%2C%20vengo%20desde%20la%20p%C3%A1gina%20de%20Kuentra%20y%20quer%C3%ADa%20hacer%20una%20consulta."><MessageCircle className="size-4 text-brand" /> WhatsApp <ArrowUpRight className="size-3" /></a>
+              <a className="flex items-center gap-2" href="https://www.instagram.com/kuentra_ar/"><Camera className="size-4 text-brand" /> Instagram <ArrowUpRight className="size-3" /></a>
             </div>
           </div>
         </div>
