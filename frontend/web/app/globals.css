@@ -54,6 +54,40 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .button-primary:hover { background: #082c53; }
 .button-secondary { border: 1px solid rgba(7,27,46,.15); background: rgba(255,255,255,.78); color: var(--ink); }
 .button-secondary:hover { border-color: rgba(76,157,219,.65); }
+.testimonial-button { position: relative; isolation: isolate; overflow: visible; }
+.testimonial-button-label { position: relative; z-index: 2; }
+.testimonial-cracks, .testimonial-stars { position: absolute; inset: 0; pointer-events: none; }
+.testimonial-cracks { z-index: 1; overflow: hidden; border-radius: inherit; }
+.testimonial-cracks span { position: absolute; left: var(--crack-left); top: var(--crack-top); width: var(--crack-width); height: 1.25px; opacity: 0; background: linear-gradient(90deg, rgba(7,27,46,.92), rgba(76,157,219,.35)); transform-origin: left center; transform: rotate(var(--crack-angle)) scaleX(0); }
+.testimonial-cracks span::after { content: ""; position: absolute; left: 48%; top: 0; width: 58%; height: 1px; background: rgba(12,56,104,.72); transform: rotate(var(--branch-angle)); transform-origin: left center; }
+.testimonial-cracks span:nth-child(1) { --crack-left: 6%; --crack-top: 24%; --crack-width: 31%; --crack-angle: 13deg; --branch-angle: 39deg; }
+.testimonial-cracks span:nth-child(2) { --crack-left: 25%; --crack-top: 33%; --crack-width: 21%; --crack-angle: 61deg; --branch-angle: -44deg; }
+.testimonial-cracks span:nth-child(3) { --crack-left: 38%; --crack-top: 61%; --crack-width: 29%; --crack-angle: -17deg; --branch-angle: 52deg; }
+.testimonial-cracks span:nth-child(4) { --crack-left: 57%; --crack-top: 23%; --crack-width: 29%; --crack-angle: 25deg; --branch-angle: 48deg; }
+.testimonial-cracks span:nth-child(5) { --crack-left: 73%; --crack-top: 62%; --crack-width: 20%; --crack-angle: -46deg; --branch-angle: -51deg; }
+.testimonial-cracks span:nth-child(6) { --crack-left: 16%; --crack-top: 72%; --crack-width: 25%; --crack-angle: -29deg; --branch-angle: 47deg; }
+.testimonial-cracks span:nth-child(7) { --crack-left: 48%; --crack-top: 10%; --crack-width: 18%; --crack-angle: 72deg; --branch-angle: -42deg; }
+.testimonial-cracks span:nth-child(8) { --crack-left: 51%; --crack-top: 77%; --crack-width: 24%; --crack-angle: 14deg; --branch-angle: -55deg; }
+.testimonial-cracks span:nth-child(9) { --crack-left: 10%; --crack-top: 51%; --crack-width: 17%; --crack-angle: -68deg; --branch-angle: 43deg; }
+.testimonial-cracks span:nth-child(10) { --crack-left: 84%; --crack-top: 35%; --crack-width: 13%; --crack-angle: 79deg; --branch-angle: -48deg; }
+.testimonial-cracks span:nth-child(11) { --crack-left: 34%; --crack-top: 49%; --crack-width: 17%; --crack-angle: 164deg; --branch-angle: 46deg; }
+.testimonial-stars { z-index: 4; }
+.testimonial-stars span { --star-x: 0px; --star-y: 0px; --star-rotation: 0deg; --star-delay: 0ms; --star-size: 14px; position: absolute; left: 50%; top: 50%; width: var(--star-size); height: var(--star-size); opacity: 0; background: url("/kuentra-mark.svg") center / contain no-repeat; filter: drop-shadow(0 2px 5px rgba(76,157,219,.38)); transform: translate(-50%,-50%) scale(.15) rotate(0); }
+.testimonial-stars span:nth-child(1) { --star-x: -88px; --star-y: -42px; --star-rotation: -130deg; --star-delay: 0ms; }
+.testimonial-stars span:nth-child(2) { --star-x: -48px; --star-y: -58px; --star-rotation: 110deg; --star-delay: 35ms; --star-size: 10px; }
+.testimonial-stars span:nth-child(3) { --star-x: 4px; --star-y: -68px; --star-rotation: 190deg; --star-delay: 15ms; }
+.testimonial-stars span:nth-child(4) { --star-x: 57px; --star-y: -53px; --star-rotation: 120deg; --star-delay: 55ms; --star-size: 11px; }
+.testimonial-stars span:nth-child(5) { --star-x: 91px; --star-y: -19px; --star-rotation: 210deg; --star-delay: 20ms; }
+.testimonial-stars span:nth-child(6) { --star-x: 86px; --star-y: 37px; --star-rotation: 150deg; --star-delay: 70ms; --star-size: 10px; }
+.testimonial-stars span:nth-child(7) { --star-x: 37px; --star-y: 59px; --star-rotation: -170deg; --star-delay: 30ms; }
+.testimonial-stars span:nth-child(8) { --star-x: -15px; --star-y: 64px; --star-rotation: 130deg; --star-delay: 65ms; --star-size: 11px; }
+.testimonial-stars span:nth-child(9) { --star-x: -67px; --star-y: 48px; --star-rotation: -200deg; --star-delay: 40ms; }
+.testimonial-stars span:nth-child(10) { --star-x: -94px; --star-y: 9px; --star-rotation: 160deg; --star-delay: 75ms; --star-size: 10px; }
+.testimonial-button:hover, .testimonial-button:focus-visible { animation: testimonial-impact 520ms cubic-bezier(.2,.8,.2,1); border-color: rgba(76,157,219,.8); box-shadow: 0 12px 28px rgba(12,56,104,.14); }
+.testimonial-button:hover .testimonial-cracks span, .testimonial-button:focus-visible .testimonial-cracks span { opacity: 1; transform: rotate(var(--crack-angle)) scaleX(1); transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 100ms ease; }
+.testimonial-button:hover .testimonial-stars span, .testimonial-button:focus-visible .testimonial-stars span { animation: testimonial-star-burst 720ms cubic-bezier(.12,.72,.25,1) var(--star-delay) both; }
+.testimonial-button:active { animation: testimonial-break 260ms ease-out; }
+.testimonial-button:active .testimonial-button-label { transform: scale(.96); }
 .button-light { background: white; color: var(--brand-dark); }
 .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--ink); transition: color 180ms ease, gap 180ms ease; }
 .text-link:hover { gap: 12px; color: var(--brand-dark); }
@@ -86,6 +120,9 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 @keyframes whatsapp-spin { 0%,68%,100% { transform: rotate(0); } 74% { transform: rotate(-20deg); } 88% { transform: rotate(720deg); } 92% { transform: rotate(720deg); } }
 @keyframes whatsapp-trail { 0%,68%,100% { opacity: 0; transform: scale(.7); } 73% { opacity: .95; transform: scale(.88); } 91% { opacity: 0; transform: scale(1.95); } }
 @keyframes whatsapp-pulse { 0%,68%,100% { box-shadow: 0 14px 32px rgba(37,211,102,.38); } 76% { box-shadow: 0 0 0 11px rgba(37,211,102,.18), 0 16px 36px rgba(37,211,102,.55); } 90% { box-shadow: 0 0 0 22px rgba(37,211,102,0), 0 14px 32px rgba(37,211,102,.38); } }
+@keyframes testimonial-impact { 0% { transform: translateY(0) rotate(0); } 22% { transform: translateY(-3px) rotate(-1.1deg); } 42% { transform: translateY(-2px) rotate(1deg); } 62% { transform: translateY(-2px) rotate(-.45deg); } 100% { transform: translateY(-2px) rotate(0); } }
+@keyframes testimonial-break { 0% { transform: translateY(-2px) scale(1); } 35% { transform: translateY(0) scale(.94,.9); } 70% { transform: translateY(-3px) scale(1.04,1.07); } 100% { transform: translateY(-2px) scale(1); } }
+@keyframes testimonial-star-burst { 0% { opacity: 0; transform: translate(-50%,-50%) scale(.15) rotate(0); } 18% { opacity: 1; } 72% { opacity: .95; } 100% { opacity: 0; transform: translate(calc(-50% + var(--star-x)),calc(-50% + var(--star-y))) scale(1.15) rotate(var(--star-rotation)); } }
 
 @media (min-width: 768px) {
   .site-container { width: min(100% - 4rem, 1240px); }

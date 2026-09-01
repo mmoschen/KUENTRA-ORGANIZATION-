@@ -27,9 +27,27 @@ export function ReviewsExperience() {
           href="https://www.instagram.com/kuentra_ar/"
           target="_blank"
           rel="noreferrer"
-          className="button button-secondary h-11 min-h-11 px-4"
+          className="testimonial-button button button-secondary h-11 min-h-11 px-4"
         >
-          Ver más testimonios
+          <span className="testimonial-button-label">Ver más testimonios</span>
+          <span className="testimonial-cracks" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </span>
+          <span className="testimonial-stars" aria-hidden="true">
+            {Array.from({ length: 10 }, (_, index) => (
+              <span key={index} />
+            ))}
+          </span>
         </a>
       </div>
     </>
