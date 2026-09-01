@@ -68,7 +68,7 @@ export function ClientConversationCard({ conversation }: { conversation: ClientC
       </header>
 
       <div className="px-4 md:px-5">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-ink">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-xl bg-ink">
           <div
             className="flex h-full transition-transform duration-500 ease-[cubic-bezier(.22,.61,.36,1)]"
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
