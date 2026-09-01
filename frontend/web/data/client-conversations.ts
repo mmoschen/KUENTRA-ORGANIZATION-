@@ -3,6 +3,7 @@ export type ClientConversationScreenshot = {
   alt: string;
   width: number;
   height: number;
+  fit?: "contain" | "cover";
 };
 
 export type ClientConversation = {
@@ -43,23 +44,32 @@ export const clientConversations: ClientConversation[] = [
         src: "/testimonials/cliente-02/01.png",
         alt: "Conversación anonimizada con la consulta inicial sobre opciones de ChatGPT Plus",
         width: 941,
-        height: 1672,
+        height: 1671,
       },
       {
         src: "/testimonials/cliente-02/02.png",
         alt: "Conversación anonimizada con la elección del plan y el acceso a la cuenta",
-        width: 941,
-        height: 1672,
+        width: 853,
+        height: 1844,
+        fit: "cover",
       },
       {
         src: "/testimonials/cliente-02/03.png",
         alt: "Conversación anonimizada con la coordinación y confirmación del pago",
-        width: 941,
-        height: 1672,
+        width: 864,
+        height: 1821,
+        fit: "cover",
       },
+    ],
+  },
+  {
+    id: "cliente-03",
+    label: "Cliente 03",
+    verificationLabel: "Cliente verificado",
+    screenshots: [
       {
-        src: "/testimonials/cliente-02/04.png",
-        alt: "Conversación anonimizada con la entrega de la guía y el cierre de la compra",
+        src: "/testimonials/cliente-03/01.png",
+        alt: "Conversación anonimizada con la entrega del acceso y la confirmación de la transferencia",
         width: 941,
         height: 1672,
       },
