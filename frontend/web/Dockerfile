@@ -17,9 +17,7 @@ COPY . .
 
 # Las variables requeridas durante el prerender deben estar disponibles en el build.
 ARG KUENTRA_API_URL
-ARG NEXT_PUBLIC_KUENTRA_API_URL
 ENV KUENTRA_API_URL=${KUENTRA_API_URL}
-ENV NEXT_PUBLIC_KUENTRA_API_URL=${NEXT_PUBLIC_KUENTRA_API_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build --workspace=@kuentra/web

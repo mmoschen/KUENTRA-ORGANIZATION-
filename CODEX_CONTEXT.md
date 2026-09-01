@@ -24,7 +24,7 @@ KUENTRA-ORGANIZATION/
 Arquitectura futura prevista:
 
 ```text
-Next.js → NestJS API → Prisma → PostgreSQL
+Next.js → NestJS API
 ```
 
 El frontend podrá desplegarse en Vercel y el backend en Railway con ciclos independientes.

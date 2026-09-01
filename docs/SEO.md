@@ -10,7 +10,7 @@ Auditoría inicial realizada el 2026-08-30, sin modificar código funcional, met
 
 El frontend es una aplicación Next.js 16 con App Router. La home (`/`) se entrega prerenderizada/SSR con el contenido principal y sus metadatos ya presentes en el HTML inicial. La metadata se centraliza en `frontend/web/app/layout.tsx`; `sitemap.xml` y `robots.txt` se generan mediante las rutas nativas `app/sitemap.ts` y `app/robots.ts`.
 
-La única página pública indexable actual es la home. El catálogo de seis servicios vive como secciones dentro de esa URL; no hay fichas públicas individuales. La ruta administrativa `/admin/opiniones` declara `noindex, nofollow` y no está en el sitemap.
+La única página pública indexable actual es la home. El catálogo de seis servicios vive como secciones dentro de esa URL; no hay fichas públicas individuales.
 
 ## 3. Infraestructura e indexación
 
@@ -21,7 +21,7 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 | Sitemap | OK, mejorable | `https://kuentra.com.ar/sitemap.xml` responde XML válido y contiene una sola URL: `https://kuentra.com.ar`. Es generado por `frontend/web/app/sitemap.ts`. |
 | Robots | OK, revisar cambios externos | `https://kuentra.com.ar/robots.txt` permite `User-agent: *` y referencia el sitemap. Además contiene un bloque administrado por Cloudflare que restringe algunos crawlers de IA; Googlebot no queda bloqueado. Ese bloque no está en el repositorio. |
 | Google Search Console | Configurado (según contexto) | Propiedad verificada, sitemap enviado y correcto. No se auditó cobertura, rendimiento ni consultas porque no se recibió acceso a esos reportes. |
-| Indexación actual | Home indexada (según contexto) | Search Console reporta una URL descubierta desde sitemap. La home es indexable; `/admin/opiniones` incluye `noindex, nofollow`. |
+| Indexación actual | Home indexada (según contexto) | Search Console reporta una URL descubierta desde sitemap. La home es indexable. |
 
 ## 4. Auditoría técnica
 
@@ -29,7 +29,7 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
-| OK / Mejorable | `frontend/web/app/layout.tsx` | La home publica título por defecto `Kuentra \| Servicios digitales más simples` y una meta description específica y natural. `metadataBase` está configurado. La ruta admin hereda la description y metadatos sociales de la home aunque noindex. | Conservar la metadata actual de la home. Al crear rutas públicas, definir título y description propios. En una etapa futura, neutralizar o especificar la metadata heredada del área admin para evitar señales confusas, sin quitar su `noindex`. |
+| OK / Mejorable | `frontend/web/app/layout.tsx` | La home publica título por defecto `Kuentra \| Servicios digitales más simples` y una meta description específica y natural. `metadataBase` está configurado. | Conservar la metadata actual de la home. Al crear rutas públicas, definir título y description propios. |
 | Mejorable | `frontend/web/components/page-title-switcher.tsx` | Un componente cliente reemplaza `document.title` al ocultarse la pestaña. El HTML inicial conserva el título correcto, pero el título visible deja de coincidir con la metadata declarada. | Evaluar eliminar este cambio de título o limitarlo fuera de la metadata SEO. No implementar en esta etapa. |
 
 ### Canonical
@@ -37,13 +37,12 @@ La única página pública indexable actual es la home. El catálogo de seis ser
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
 | OK / Mejorable | `frontend/web/app/layout.tsx` | La home emite una única canonical absoluta: `https://kuentra.com.ar`. | Mantenerla para `/`. Cuando haya páginas públicas nuevas, definir su canonical propia. |
-| Mejorable | `frontend/web/app/admin/opiniones/page.tsx`, `frontend/web/app/layout.tsx` | `/admin/opiniones` es `noindex, nofollow`, pero hereda la canonical de la home. No produce contenido duplicado indexable por el noindex, aunque la señal es inconsistente. | Ajustar la metadata administrativa en una etapa separada; conservar el bloqueo de indexación. |
 
 ### Robots e indexación
 
 | Estado | Archivos implicados | Hallazgo | Recomendación |
 | --- | --- | --- | --- |
-| OK | `frontend/web/app/robots.ts`, `frontend/web/app/admin/opiniones/page.tsx` | La regla local permite el rastreo del sitio y el admin declara `noindex, nofollow`. No se detectó `X-Robots-Tag` contradictorio en la home. | No modificar sin una necesidad concreta. Validar en Search Console tras publicar rutas nuevas. |
+| OK | `frontend/web/app/robots.ts` | La regla local permite el rastreo del sitio. No se detectó `X-Robots-Tag` contradictorio en la home. | No modificar sin una necesidad concreta. Validar en Search Console tras publicar rutas nuevas. |
 | Revisar | Cloudflare (externo al repositorio) | Cloudflare agrega un bloque de “content signals” al `robots.txt`, incluyendo restricciones para `Google-Extended` y otros bots de IA. No bloquea Googlebot para resultados de búsqueda. | Registrar cualquier cambio hecho en Cloudflare y verificar siempre que `User-agent: Googlebot` siga permitido. |
 
 ### Sitemap
@@ -121,7 +120,6 @@ Propiedades omitidas por no estar confirmadas: razón social, CUIT, dirección, 
 | --- | --- | --- | --- |
 | OK / Mejorable | `frontend/web/app/layout.tsx`, `components/*` | `html` declara `lang="es"`; hay etiquetas y roles accesibles en logo, CTAs, diálogo, botones de calificación y control de navegación. Las imágenes analizadas tienen alt adecuado. | Mantener estos atributos en todo cambio. |
 | Mejorable | `frontend/web/components/site-header.tsx` | El `nav` móvil no tiene `aria-label`, a diferencia del menú de escritorio. | Añadir una etiqueta de navegación accesible cuando se trabaje accesibilidad. |
-| Mejorable | `frontend/web/components/review-form.tsx` | El diálogo tiene roles y etiqueta, pero no se observa manejo de foco al abrir/cerrar ni una trampa de foco. | Corregirlo en una etapa de accesibilidad; mejora la experiencia sin impacto negativo de SEO. |
 | Revisar | `frontend/web/app/globals.css` | No se hizo una medición automática de contraste ni auditoría de teclado completa. | Ejecutar Lighthouse Accessibility y pruebas manuales de teclado antes de considerar este punto cerrado. |
 
 ## 5. Reglas permanentes para futuros cambios SEO
@@ -387,27 +385,11 @@ Lighthouse detectó 51 nodos. Las causas se concentran en opacidades bajas para 
 
 No se recomienda resolver estos fallos con opacidad, filtros o sombras únicamente: la combinación final de color y fondo debe superar el umbral de Lighthouse. La corrección debe probarse en móvil y no debe modificar contenido, URLs, metadata, sitemap ni robots.
 
-### 11.3 Errores registrados en la consola
-
-Lighthouse registró exactamente estos dos mensajes, originados por una única solicitud:
-
-```text
-Access to fetch at 'https://api-production-8b2ae.up.railway.app/reviews' from origin 'https://kuentra.com.ar' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-Failed to load resource: net::ERR_FAILED
-```
-
-| Componente / archivo | Elemento o solicitud afectada | Causa | Impacto real | Corrección recomendada | ¿Altera el diseño? | Prioridad |
-| --- | --- | --- | --- | --- | --- | --- |
-| `frontend/web/components/reviews-experience.tsx` | `useEffect` ejecuta `fetch(`${NEXT_PUBLIC_KUENTRA_API_URL}/reviews`)` al cargar la home. El bundle publicado resuelve la URL a `https://api-production-8b2ae.up.railway.app/reviews`. | La API de Railway devuelve 200 para la solicitud, pero no envía `Access-Control-Allow-Origin` cuando el origen es `https://kuentra.com.ar`. El backend usa una lista de orígenes desde `CORS_ORIGIN` en `backend/api/src/main.ts`; la configuración desplegada no permite el dominio de producción. | La carga de opiniones reales falla en navegador. El componente captura el error y muestra testimonios de muestra, por lo que la home no se cae; sin embargo, no puede mostrar opiniones remotas. El mismo origen/configuración también bloquearía el POST del formulario de opiniones. Es la causa de la penalización de Best Practices. | Configurar en el entorno de producción de la API `CORS_ORIGIN=https://kuentra.com.ar` (más cualquier otro origen explícitamente autorizado que corresponda), redesplegar la API y verificar con una solicitud que incluya `Origin: https://kuentra.com.ar` y reciba el header permitido. No añadir middleware ni desactivar CORS en el frontend. | No; es una corrección de configuración de la API. | Alta |
-
-El error proviene de una interacción de código propio con la API propia de Kuentra desplegada en Railway: el disparador es el componente cliente y la causa raíz es la configuración externa del backend. No proviene de Cloudflare, una extensión del navegador, Lighthouse ni un recurso de terceros. No apareció en esta ejecución un error de favicon ni otro error de consola independiente.
-
 ### Orden recomendado para una futura etapa de corrección
 
-1. Corregir la configuración CORS de la API y comprobar que desaparecen ambos mensajes de consola sin alterar la experiencia visual.
-2. Corregir el grupo ARIA de las calificaciones y validar con Lighthouse y lector de pantalla.
-3. Definir y validar las combinaciones de color del CTA final y de las tarjetas antes de cambiar estilos; aplicar los cambios de contraste en una etapa visual controlada.
-4. Reejecutar Lighthouse móvil para confirmar que Accessibility y Best Practices mejoran, sin abrir una tarea de rendimiento.
+1. Corregir el grupo ARIA de las calificaciones y validar con Lighthouse y lector de pantalla.
+2. Definir y validar las combinaciones de color del CTA final y de las tarjetas antes de cambiar estilos; aplicar los cambios de contraste en una etapa visual controlada.
+3. Reejecutar Lighthouse móvil para confirmar que Accessibility y Best Practices mejoran, sin abrir una tarea de rendimiento.
 
 ## 12. Propuesta mínima de corrección de contraste
 

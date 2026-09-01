@@ -3,7 +3,6 @@
 import { ShieldCheck } from "lucide-react";
 import { clientConversations } from "@/data/client-conversations";
 import { ClientConversationCard } from "./client-conversation-card";
-import { ReviewForm } from "./review-form";
 
 export function ReviewsExperience() {
   const hasPublishedConversations = clientConversations.length > 0;
@@ -24,7 +23,14 @@ export function ReviewsExperience() {
             <span>Capturas reales de conversaciones con clientes. Datos personales ocultos por privacidad.</span>
           </p>
         )}
-        <ReviewForm />
+        <a
+          href="https://www.instagram.com/kuentra_ar/"
+          target="_blank"
+          rel="noreferrer"
+          className="button button-secondary h-11 min-h-11 px-4"
+        >
+          Ver más testimonios
+        </a>
       </div>
     </>
   );
