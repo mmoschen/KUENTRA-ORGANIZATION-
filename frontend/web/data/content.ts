@@ -1,21 +1,3 @@
-export const testimonials = [
-  {
-    quote: "Me explicaron todo antes de activar el servicio. Fue rápido y pude empezar a usarlo ese mismo día.",
-    name: "Martina R.",
-    role: "Estudiante de diseño",
-  },
-  {
-    quote: "Lo que más valoro es tener una persona real del otro lado cuando necesito ayuda.",
-    name: "Nicolás A.",
-    role: "Creador de contenido",
-  },
-  {
-    quote: "Centralicé las herramientas que uso para trabajar y dejé de perder tiempo buscando opciones.",
-    name: "Sofía M.",
-    role: "Freelance",
-  },
-];
-
 export const faqs = [
   {
     question: "¿Cómo recibo mi servicio?",

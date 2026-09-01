@@ -1,7 +1,7 @@
 import { ArrowRight, CreditCard, KeyRound, MessageCircle, MousePointer2, Sparkles, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { products } from "@/data/products";
-import { faqs, testimonials } from "@/data/content";
+import { faqs } from "@/data/content";
 import { ProductCard } from "./product-card";
 import { ReviewsExperience } from "./reviews-experience";
 import type { OfficialDollarRate } from "@kuentra/shared";
@@ -76,7 +76,7 @@ export function Testimonials() {
           </div>
           <p className="section-intro">Experiencias de personas que usan Kuentra para estudiar, crear y trabajar mejor.</p>
         </div>
-        <ReviewsExperience fallback={testimonials} />
+        <ReviewsExperience />
       </div>
     </section>
   );
