@@ -92,6 +92,27 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: var(--ink); transition: color 180ms ease, gap 180ms ease; }
 .text-link:hover { gap: 12px; color: var(--brand-dark); }
 
+.faq {
+  interpolate-size: allow-keywords;
+}
+.faq::details-content {
+  display: block;
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    block-size 360ms cubic-bezier(.22, 1, .36, 1),
+    opacity 220ms ease,
+    transform 360ms cubic-bezier(.22, 1, .36, 1),
+    content-visibility 360ms allow-discrete;
+}
+.faq[open]::details-content {
+  block-size: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .hero-grid::before { content: ""; position: absolute; inset: 0; opacity: .48; background-image: linear-gradient(rgba(12,56,104,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(12,56,104,.055) 1px, transparent 1px); background-size: 64px 64px; mask-image: linear-gradient(to bottom, black, transparent 84%); }
 .hero-console::before { content: ""; position: absolute; inset: 8%; border-radius: 999px; background: rgba(76,157,219,.09); filter: blur(45px); }
 .hero-console > div:nth-child(3) { animation: float 5s ease-in-out infinite; }

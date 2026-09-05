@@ -94,12 +94,12 @@ export function FAQ() {
         <div className="border-t border-line">
           {faqs.map((faq, index) => (
             <details key={faq.question} className="faq group border-b border-line">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-7 sm:gap-5 [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-7 outline-none transition-colors duration-300 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:gap-5 [&::-webkit-details-marker]:hidden">
                 <span className="flex items-baseline gap-3 sm:gap-5">
                   <span className="font-mono text-[10px] tracking-[0.12em] text-brand">{String(index + 1).padStart(2, "0")}</span>
                   <span className="font-display text-xl font-semibold tracking-[-0.035em] text-ink">{faq.question}</span>
                 </span>
-                <span className="relative size-5 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-ink after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:bg-ink after:transition-transform group-open:after:rotate-90" />
+                <span className="relative size-5 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-ink after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:bg-ink after:transition-transform after:duration-300 after:ease-out group-open:after:rotate-90" />
               </summary>
               <p className="max-w-2xl pb-7 pl-7 text-[15px] leading-7 text-muted sm:pl-10">{faq.answer}</p>
             </details>
