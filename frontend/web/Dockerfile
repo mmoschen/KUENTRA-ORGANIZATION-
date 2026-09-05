@@ -35,6 +35,10 @@ COPY --from=builder /app/frontend/web/public ./frontend/web/public
 COPY --from=builder /app/frontend/web/.next/standalone ./
 COPY --from=builder /app/frontend/web/.next/static ./frontend/web/.next/static
 
+# Next escribe exclusivamente sus artefactos regenerables en este directorio.
+# El resto del runtime conserva la propiedad de root y queda de solo lectura.
+RUN install -d -o node -g node -m 0750 /app/frontend/web/.next/cache
+
 USER node
 
 EXPOSE 3000

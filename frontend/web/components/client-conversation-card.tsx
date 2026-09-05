@@ -84,6 +84,7 @@ export function ClientConversationCard({ conversation }: { conversation: ClientC
                   alt={screenshot.alt}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"
+                  unoptimized
                   className={`select-none ${screenshot.fit === "cover" ? "object-cover" : "object-contain"}`}
                   draggable={false}
                 />

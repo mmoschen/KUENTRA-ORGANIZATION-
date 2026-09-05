@@ -42,7 +42,15 @@ export function HowItWorks() {
             <h2 className="section-title mt-5 text-white">Simple desde<br />el primer paso.</h2>
           </div>
           <div className="flex flex-col items-center">
-            <Image src="/mascota.png" alt="Mascota de Kuentra" width={1974} height={797} className="mb-2 w-52 sm:w-64 md:w-80" />
+            <Image
+              src="/mascota.webp"
+              alt="Mascota de Kuentra"
+              width={961}
+              height={388}
+              sizes="(min-width: 768px) 320px, (min-width: 640px) 256px, 208px"
+              unoptimized
+              className="mb-2 w-52 sm:w-64 md:w-80"
+            />
             <p className="section-intro text-center !text-white/55">Sin formularios eternos ni procesos confusos. Sabés qué sigue en cada momento.</p>
           </div>
         </div>
